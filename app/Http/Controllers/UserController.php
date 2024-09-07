@@ -1,0 +1,118 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+
+class UserController extends Controller
+{
+    public function User(Request $request) {
+
+        $users = User::paginate(10);
+
+        return view('page.users.index', ['users'=>$users]);
+    }
+
+    public function Insert() {
+        return view('page.users.insert');
+    }
+
+    public function InsertData(Request $request) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
+            'password_confirm' => 'required|string|max:255',
+            // Other validations
+        ], [
+            'name.required' => 'Please enter name.',
+            'image.required' => 'Please enter image.',
+            'email.required' => 'Please enter email.',
+            'username.required' => 'Please enter usernam.',
+            'password.required' => 'Please enter password.',
+            'password_confirm.required' => 'Please enter password confirm.',
+            // Custom messages for other fields
+        ]);
+
+        $user = new User();
+        $user->name = $request->input("name");
+        $user->username = $request->input("username");
+        $user->email = $request->input("email");
+        $user->password = Hash::make($request->input("password"));
+        if($request->hasFile('image'))
+        {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension(); 
+            $filename = time().'.'.$extension;
+            $file->move('uploads/users', $filename);
+            $user->image = $filename;
+        }
+        $user->save();
+
+        return redirect()->route('user')->with('message', 'User Inserted Successfully');
+    }
+
+    // update 
+    public function Update($id) {
+
+        $user = User::find($id);
+
+        return view('page.users.edit', ['user' => $user]);
+    }
+
+    public function DataUpdate(Request $request, $id) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
+            'password_confirm' => 'required|string|max:255',
+            // Other validations
+        ], [
+            'name.required' => 'Please enter name.',
+            'image.required' => 'Please enter image.',
+            'email.required' => 'Please enter email.',
+            'username.required' => 'Please enter usernam.',
+            'password.required' => 'Please enter password.',
+            'password_confirm.required' => 'Please enter confirm password.',
+            // Custom messages for other fields
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->input("name");
+        $user->username = $request->input("username");
+        $user->email = $request->input("email");
+        if($request->hasFile('image'))
+        {
+            $destination = 'uploads/users'. $user->image;
+            if(User::exists($destination))
+            {
+                User::destroy($destination);
+            }
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension(); 
+            $filename = time().'.'.$extension;
+            $file->move('uploads/users', $filename);
+            $user->image = $filename;
+            
+        }
+        $user->update();
+        
+        return redirect()->route('user')->with('message','User Updated Successfully');
+    }
+
+    // delete 
+    public function Delete(Request $request, $id){
+        try {   
+            User::destroy($request->id);
+            return redirect()->route('user');
+        } catch(\Exception $e) {
+            report($e);
+        }
+    }
+}
