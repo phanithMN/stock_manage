@@ -39,7 +39,7 @@
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="product_id">Product <span class="text-danger">*</span></label>
-                                        <select class="form-select form-control" id="product_id" name="product_id">
+                                        <select class="form-select form-control" id="product_id" name="product_id" required>
                                             <option value="">Chosse Product</option>
                                             @foreach($products as $item)
                                             <option value="{{$item->id}}">{{$item->name}}</option>
@@ -59,6 +59,7 @@
                                         id="price"
                                         name="price"
                                         placeholder="Enter Price"
+                                        required
                                         />
                                     </div>
                                     @error('price')
@@ -74,6 +75,7 @@
                                         id="quantity"
                                         name="quantity"
                                         placeholder="Enter Quantity"
+                                        required
                                         />
                                     </div>
                                     @error('quantity')
@@ -84,7 +86,7 @@
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="status_id">Status <span class="text-danger">*</span></label>
-                                        <select class="form-select form-control" id="status_id" name="status_id">
+                                        <select class="form-select form-control" id="status_id" name="status_id" required>
                                             <option value="">Chosse Status</option>
                                             @foreach($status as $item)
                                             <option value="{{$item->id}}">{{$item->name}}</option>
