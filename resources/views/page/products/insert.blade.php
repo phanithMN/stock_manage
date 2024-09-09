@@ -45,11 +45,10 @@
                                         id="Name"
                                         name="name"
                                         placeholder="Enter Name"
+                                        required
                                         />
                                     </div>
-                                    @error('name')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
+                                   
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
@@ -60,11 +59,9 @@
                                         id="image"
                                         name="image"
                                         placeholder="Enter Image"
+                                        required
                                         />
                                     </div>
-                                    @error('image')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
@@ -75,11 +72,9 @@
                                         id="cost_price"
                                         name="cost_price"
                                         placeholder="Enter Cost Price"
+                                        required
                                         />
                                     </div>
-                                    @error('cost_price')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
@@ -90,11 +85,9 @@
                                         id="price"
                                         name="price"
                                         placeholder="Enter Price"
+                                        required
                                         />
                                     </div>
-                                    @error('price')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
@@ -105,39 +98,32 @@
                                         id="quantity"
                                         name="quantity"
                                         placeholder="Enter Quantity"
+                                        required
                                         />
                                     </div>
-                                    @error('quantity')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="uom_id">UOM <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="uom_id" name="uom_id">
+                                        <select class="form-select" id="uom_id" name="uom_id" required>
                                             <option value="">Chosse UOM</option>
                                             @foreach($unit_of_measures as $unit_of_measure)
                                             <option value="{{$unit_of_measure->id}}">{{$unit_of_measure->unit}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('uom_id')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="category_id">Category <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="type" name="category_id">
+                                        <select class="form-select" id="type" name="category_id" required>
                                             <option value="">Chosse Categories</option>
                                             @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('category_id')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
+                                    
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">

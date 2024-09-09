@@ -45,27 +45,6 @@ class ProductController extends Controller
     }
 
     public function InsertData(Request $request) {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'status_id' => 'required|string|max:255',
-            'quantity' => 'required|string|max:255',
-            'category_id' => 'required|string|max:255',
-            'price' => 'required|string|max:255',
-            'cost_price' => 'required|string|max:255',
-            'uom_id' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
-            // Other validations
-        ], [
-            'name.required' => 'Please enter name.',
-            'status_id.required' => 'Please select status.',
-            'category_id.required' => 'Please select category.',
-            'price.required' => 'Please enter price.',
-            'cost_price.required' => 'Please enter cost price.',
-            'quantity.required' => 'Please enter quantity.',
-            'uom_id.required' => 'Please select uom.',
-            'image.required' => 'Please enter image.',
-            // Custom messages for other fields
-        ]);
 
         $products = new Product();
         $products->name = $request->input('name');
@@ -102,24 +81,6 @@ class ProductController extends Controller
     }
 
     public function DataUpdate(Request $request, $id) {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'quantity' => 'required|string|max:255',
-            'category_id' => 'required|string|max:255',
-            'price' => 'required|string|max:255',
-            'cost_price' => 'required|string|max:255',
-            'uom_id' => 'required|string|max:255',
-            // Other validations
-        ], [
-            'name.required' => 'Please enter name.',
-            'category_id.required' => 'Please select category.',
-            'price.required' => 'Please enter price.',
-            'cost_price.required' => 'Please enter cost price.',
-            'quantity.required' => 'Please enter quantity.',
-            'uom_id.required' => 'Please select uom.',
-            // Custom messages for other fields
-        ]);
-        
         $products = Product::find($id);
         $products->name = $request->input('name');
         $products->quantity = $request->input('quantity');
