@@ -45,11 +45,9 @@
                                         id="name"
                                         name="name"
                                         placeholder="Enter Name"
+                                        required
                                         />
                                     </div>
-                                    @error('name')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
@@ -60,11 +58,9 @@
                                         id="image"
                                         name="image"
                                         placeholder="Enter Name"
+                                        required
                                         />
                                     </div>
-                                    @error('image')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
@@ -75,11 +71,9 @@
                                         id="email"
                                         name="email"
                                         placeholder="Enter Email"
+                                        required
                                         />
                                     </div> 
-                                    @error('email')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div> 
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
@@ -90,29 +84,37 @@
                                         id="username"
                                         name="username"
                                         placeholder="Enter Username"
+                                        required
                                         />
                                     </div>
-                                    @error('username')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
+                                    
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label" for="password">{{ __('Password') }} <span class="text-danger">*</span></label>
-                                        <input id="password" type="password" class="form-control placeholder="Enter password" name="password"   autocomplete="new-password">
+                                        <input 
+                                        id="password" 
+                                        type="password" 
+                                        class="form-control" 
+                                        placeholder="Enter password" 
+                                        name="password"   
+                                        autocomplete="new-password"
+                                        required>
                                     </div>
-                                    @error('password')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
+                                   
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label" for="password">{{ __('Confirm Password') }} <span class="text-danger">*</span></label>
-                                        <input id="password_confirm" type="password" class="form-control" placeholder="Enter confirm password" name="password_confirmation"  autocomplete="new-password">
+                                        <input 
+                                        id="password_confirm" 
+                                        type="password" 
+                                        class="form-control" 
+                                        placeholder="Enter confirm password" 
+                                        name="password_confirmation"  
+                                        autocomplete="new-password"
+                                        required>
                                     </div>
-                                    @error('password_confirm')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                             </div>
                             

@@ -37,27 +37,10 @@ class StockController extends Controller
     }
 
     public function InsertData(Request $request) {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'quantity' => 'required|string|max:255',
-            'price' => 'required|string|max:255',
-            'product_id' => 'required|exists:products,id',
-            'status_id' => 'required|exists:products,id',
-            // Other validations
-        ], [
-            'name.required' => 'Please enter name.',
-            'quantity.required' => 'Please enter quantity.',
-            'price.required' => 'Please enter price.',
-            'product_id.required' => 'Please select product.',
-            'status_id.required' => 'Please select status.',
-            // Custom messages for other fields
-        ]);
 
-        $productName = $validatedData['name'];
-        $sku = $this->generateSku($productName);
+        $sku = $this->generateSku($request->input('product_id'));
 
         $stock = new Stock();
-        $stock->name = $request->input('name');
         $stock->quantity = $request->input('quantity');
         $stock->price = $request->input('price');
         $stock->product_id = $request->input('product_id');
@@ -83,7 +66,6 @@ class StockController extends Controller
 
     public function DataUpdate(Request $request, $id) {
         $stock = Stock::find($id);
-        $stock->name = $request->input('name');
         $stock->quantity = $request->input('quantity');
         $stock->price = $request->input('price');
         $stock->product_id = $request->input('product_id');

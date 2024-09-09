@@ -20,23 +20,6 @@ class UserController extends Controller
     }
 
     public function InsertData(Request $request) {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
-            'password' => 'required|string|max:255',
-            'password_confirm' => 'required|string|max:255',
-            // Other validations
-        ], [
-            'name.required' => 'Please enter name.',
-            'image.required' => 'Please enter image.',
-            'email.required' => 'Please enter email.',
-            'username.required' => 'Please enter usernam.',
-            'password.required' => 'Please enter password.',
-            'password_confirm.required' => 'Please enter password confirm.',
-            // Custom messages for other fields
-        ]);
 
         $user = new User();
         $user->name = $request->input("name");
@@ -65,23 +48,6 @@ class UserController extends Controller
     }
 
     public function DataUpdate(Request $request, $id) {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
-            'password' => 'required|string|max:255',
-            'password_confirm' => 'required|string|max:255',
-            // Other validations
-        ], [
-            'name.required' => 'Please enter name.',
-            'image.required' => 'Please enter image.',
-            'email.required' => 'Please enter email.',
-            'username.required' => 'Please enter usernam.',
-            'password.required' => 'Please enter password.',
-            'password_confirm.required' => 'Please enter confirm password.',
-            // Custom messages for other fields
-        ]);
 
         $user = User::find($id);
         $user->name = $request->input("name");
