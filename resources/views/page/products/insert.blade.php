@@ -91,19 +91,6 @@
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="Quantity">Quantity <span class="text-danger">*</span></label>
-                                        <input
-                                        type="number"
-                                        class="form-control"
-                                        id="quantity"
-                                        name="quantity"
-                                        placeholder="Enter Quantity"
-                                        required
-                                        />
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6">
-                                    <div class="form-group">
                                         <label for="uom_id">UOM <span class="text-danger">*</span></label>
                                         <select class="form-select" id="uom_id" name="uom_id" required>
                                             <option value="">Chosse UOM</option>

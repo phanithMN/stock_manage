@@ -84,22 +84,6 @@
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="Quantity">Quantity <span class="text-danger">*</span></label>
-                                        <input
-                                        type="number"
-                                        class="form-control"
-                                        id="quantity"
-                                        name="quantity"
-                                        placeholder="Enter Quantity"
-                                        value="{{$product->quantity}}"
-                                        />
-                                    </div>
-                                    @error('quantity')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 col-lg-6">
-                                    <div class="form-group">
                                         <label for="type">Category <span class="text-danger">*</span></label>
                                         <select class="form-select" id="type" name="category_id">
                                             <option value="">Chosse Categories</option>

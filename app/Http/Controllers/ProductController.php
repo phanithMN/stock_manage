@@ -8,6 +8,7 @@ use App\Models\UnitOfMeasure;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Stock;
 
 class ProductController extends Controller
 {
@@ -48,7 +49,6 @@ class ProductController extends Controller
 
         $products = new Product();
         $products->name = $request->input('name');
-        $products->quantity = $request->input('quantity');
         $products->description = $request->input('description');
         $products->category_id = $request->input('category_id');
         $products->uom_id = $request->input('uom_id');
@@ -63,6 +63,8 @@ class ProductController extends Controller
             $products->image = $filename;
         }
         $products->save();
+
+        
         return redirect()->route('product')->with('message', 'Product Inserted Successfully');
     }
 
@@ -81,14 +83,15 @@ class ProductController extends Controller
     }
 
     public function DataUpdate(Request $request, $id) {
+
         $products = Product::find($id);
         $products->name = $request->input('name');
-        $products->quantity = $request->input('quantity');
         $products->description = $request->input('description');
         $products->category_id = $request->input('category_id');
         $products->uom_id = $request->input('uom_id');
         $products->price = $request->input('price');
         $products->cost_price = $request->input('cost_price');
+
         if($request->hasFile('image'))
         {
             $destination = 'uploads/products'. $products->image;

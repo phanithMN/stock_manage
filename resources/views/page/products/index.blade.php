@@ -72,8 +72,7 @@
                     </div>
                     <div id="add-row_filter" class="dataTables_filter">
                       <label>
-                        <form action="{{ route('product') }}" method="GET">
-                          @csrf
+                        <form action="{{ route('product') }}" method="GET" id="filterForm">
                           <input 
                           type="search" 
                           name="search" 
@@ -81,6 +80,7 @@
                           placeholder="Search..." 
                           aria-label="Search..." 
                           value="{{$search_value}}"
+                          onchange="document.getElementById('filterForm').submit();" 
                           />
                         </form>
                       </label>

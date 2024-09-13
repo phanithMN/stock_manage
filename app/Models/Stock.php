@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Stock extends Model
 {
     public $table = "stocks";
-    public $primaryKey = 'id';
     public $incrementing = true;
     public $timestamp = false;
 

@@ -18,7 +18,7 @@ class StockController extends Controller
         ->join('status', 'stocks.status_id', '=', 'status.id') 
         ->select('stocks.*', 'products.name as product_name', 'status.name as status_name')
         ->where('status.name', 'like', '%'.$request->query("status_name").'%')
-        ->where('products.name', 'like', '%'.$request->query("product_name").'%')
+        ->where('products.name', 'like', '%'.$request->query("search").'%')
         ->orderBy('stocks.id', 'asc')
         ->paginate($rowLength);
         return view('page.stocks.index', [
@@ -40,7 +40,6 @@ class StockController extends Controller
     public function InsertData(Request $request) {
 
         $sku = $this->generateSku($request->input('product_id'));
-
         $stock = new Stock();
         $stock->quantity = $request->input('quantity');
         $stock->price = $request->input('price');
@@ -49,6 +48,13 @@ class StockController extends Controller
         $stock->status_id = $request->input('status_id');
 
         $stock->save();
+
+        $product = Product::find($stock->product_id); 
+        if ($product) {
+            $product->quantity += $stock->quantity; 
+            $product->save();
+        }
+
         return redirect()->route('stock')->with('message', 'Stock Inserted Successfully');
     }
 
@@ -73,6 +79,12 @@ class StockController extends Controller
         $stock->status_id = $request->input('status_id');
        
         $stock->update();
+
+        $product = Product::find($stock->product_id); 
+        if ($product) {
+            $product->quantity += $stock->quantity; 
+            $product->update();
+        }
         
         return redirect()->route('stock')->with('message','Stock Updated Successfully');
     }
