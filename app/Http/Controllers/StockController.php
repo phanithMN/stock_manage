@@ -19,6 +19,7 @@ class StockController extends Controller
         ->select('stocks.*', 'products.name as product_name', 'status.name as status_name')
         ->where('status.name', 'like', '%'.$request->query("status_name").'%')
         ->where('products.name', 'like', '%'.$request->query("product_name").'%')
+        ->orderBy('stocks.id', 'asc')
         ->paginate($rowLength);
         return view('page.stocks.index', [
             'stocks'=>$stocks, 

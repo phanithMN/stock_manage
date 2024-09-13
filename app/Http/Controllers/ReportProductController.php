@@ -11,8 +11,6 @@ use Carbon\Carbon;
 class ReportProductController extends Controller
 {
     public function ReportProduct(Request $request) {
-        $categories = Category::all();
-        $status  = Status::all();
         $currentDate = Carbon::now()->toDateString(); 
         $rowLength = $request->query('row_length', 10);
         $search_value = $request->query("search");
@@ -20,23 +18,35 @@ class ReportProductController extends Controller
         $categories = Category::all();
         $status = Status::all();
 
-        $products = Product::join('categories', 'products.category_id', '=', 'categories.id') 
-        ->join('status', 'products.status_id', '=', 'status.id') 
-        ->join('unit_of_measure', 'products.uom_id', '=', 'unit_of_measure.id') 
-        ->select('products.*', 'categories.name as category_name', 'status.name as status_name', 'unit_of_measure.unit as uom_name')
-        ->where('products.name', 'like', '%'.$request->input('search').'%')
-        ->where('status.name', 'like', '%'.$request->query("status_name").'%')
-        ->where('categories.name', 'like', '%'.$request->query("category").'%')
-        ->whereDate('products.created_at', $date)
-        ->paginate($rowLength);
+        $rowLength = $request->query('row_length', 10);
+       
 
-        return view('page.report-product.index',
-        [
+
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $report_product = Product::whereBetween('products.created_at', [
+                $request->input('start_date'), 
+                $request->input('end_date')
+            ])
+            ->join('categories', 'products.category_id', '=', 'categories.id') 
+            ->join('unit_of_measure', 'products.uom_id', '=', 'unit_of_measure.id') 
+            ->select('products.*', 'categories.name as category_name', 'unit_of_measure.unit as uom_unit')
+            ->where('products.name', 'like', '%'.$request->input('search').'%')
+            ->paginate($rowLength);
+        } else {
+            $report_product = Product::join('categories', 'products.category_id', '=', 'categories.id') 
+            ->join('unit_of_measure', 'products.uom_id', '=', 'unit_of_measure.id') 
+            ->select('products.*', 'categories.name as category_name', 'unit_of_measure.unit as uom_unit')
+            ->where('products.name', 'like', '%'.$request->input('search').'%')
+            ->whereDate('products.created_at', Carbon::today()) 
+            ->paginate($rowLength);
+    
+        }
+        return view('page.report-product.index', [
+            'report_product'=>$report_product,
             'categories'=>$categories,
-            'status' => $status,
-            'search_value' => $search_value,
-            'products' => $products,
-            'date' => $date,
+            'status'=>$status,
+            'search_value'=>$search_value,
+            'date'=>$date
         ]);
     }
 

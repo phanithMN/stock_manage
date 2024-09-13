@@ -46,8 +46,8 @@
                       </label>
                     </div>
                   </div>
-                  <d class="col-sm-12 col-md-10 d-flex fill-right">
-                    <div class="form-controll-fillter">
+                  <div class="col-sm-12 col-md-10 d-flex fill-right">
+                    <!-- <div class="form-controll-fillter">
                       <select class="form-select form-select-sm" id="category"  name="category">
                         <option value="">Chosse Category</option>
                         @foreach ($categories as $category )
@@ -62,75 +62,85 @@
                         <option value="{{$status_item->name}}" {{ request('status_name') == $status_item->name ? 'selected' : '' }}>{{$status_item->name}}</option>
                         @endforeach
                       </select>
-                    </div>
+                    </div> -->
                     <div id="add-row_filter" class="dataTables_filter">
-                      <form action="{{ route('report-product') }}" method="GET" id="reportForm">
-                        @csrf
-                        <div class="d-flex">
-                          <input 
-                            type="date" 
-                            name="date" 
-                            class="form-control form-control-sm" 
-                            id="dateForm"
-                            value="{{$date}}"
-                            onchange="document.getElementById('reportForm').submit();" 
-                          />
+                      <form action="{{ route('report-product') }}" method="GET" class="d-flex" id="filterForm">
+                        <div class="input-filter d-flex">
+                            <label for="start_date">Start Date:</label>
+                            <input type="date" id="start_date" name="start_date"
+                            class="form-control form-control-sm"
+                            value="{{ request('start_date') }}"
+                            onchange="document.getElementById('filterForm').submit();">
+                        </div>
+
+                        <div class="input-filter d-flex">
+                            <label for="end_date">End Date:</label>
+                            <input type="date" id="end_date" name="end_date"
+                            class="form-control form-control-sm"
+                            value="{{ request('end_date') }}"
+                            onchange="document.getElementById('filterForm').submit();">
+                        </div>
+                        <div class="search-filter">
                           <input 
                           type="search" 
                           name="search" 
                           class="form-control form-control-sm" 
                           placeholder="Search..." 
                           aria-label="Search..." 
-                          value="{{$search_value}}"
-                          onchange="document.getElementById('reportForm').submit();" 
+                          value="{{ request('search')}}"
+                          onchange="document.getElementById('filterForm').submit();" 
                           />
                         </div>
-                      </form>
+                    </form>
                     </div>
                     <div class="button-export">
-                      <a href="{{ route('export-product') }}" class="btn btn-primary d-flex"><i class="fas fa-file-export"></i>Export Excel</a>
+                      <a href="{{ route('export-product') }}" class="btn btn-primary d-flex"><i class="fas fa-file-export"></i>Export</a>
                     </div>
                   </div>
+                  
                 </div>
                 <div class="row m-0">
                   <div class="col-sm-12 p-0">
                     <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                       <thead>
                         <tr role="row">
-                          <th>Image</th>
                           <th>Name</th>
-                          <th>Quantity</th>
-                          <th>Price</th>
                           <th>Category</th>
-                          <th>Status</th>
-                          <th>UOM</th>
                           <th>Date</th>
+                          <th>Cost Price</th>
+                          <th>Price</th>
+                          <th>Quntity</th>
+                          <th>Total</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @if ($products->isEmpty())
-                            <td colspan="8" class="none-report">No Product Data</td>
+                        @if ($report_product->isEmpty())
+                            <td colspan="8" class="none-report">No Stock Response</td>
                         @else
-                          @foreach ($products as $item)
-                              <tr role="row" class="odd">
-                                <td style="text-align: center">
-                                  <img src="{{ asset('uploads/products/' . $item->image) }}" alt="banner" style="width: 40px;height: auto;">
-                                </td>
+                          @foreach ($report_product as $item)
+                            <tr role="row" class="odd">
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->quantity }}</td>
-                                <td>${{ $item->price }}</td>
                                 <td>{{ $item->category_name }}</td>
-                                <td><span class="{{ $item->status_name == 'Income' ? 'color-income' : 'color-return' }} status">{{ $item->status_name }}</span></td>
-                                <td>{{ $item->uom_name }}</td>
                                 <td>{{ $item->created_at->format('Y-m-d') }}</td>
-                              </tr>
+                                <td>${{number_format($item->cost_price, 2)}}</td>
+                                <td>${{number_format($item->price, 2)}}</td>
+                                <td>{{$item->quantity}}</td>
+                                <td>${{number_format($item->quantity * $item->price, 2)}}</td>
+                            </tr>
                           @endforeach
                         @endif
+                        <tr role="row" class="odd bg-color-total">
+                          <td colspan="3" class="text-center">Sub Total</td>
+                          <td>${{number_format($report_product->sum('cost_price'), 2)}}</td>
+                          <td>${{number_format($report_product->sum('price'), 2)}}</td>
+                          <td>{{$report_product->sum('quantity')}}</td>
+                          <td>${{number_format($report_product->sum('quantity') * $report_product->sum('price'), 2)}}</td>
+                        </tr>
                       </tbody>
                       <tfoot>
                         <tr>
                           <td colspan="10" class="pagination-table">
-                            {{$products->onEachSide(1)->links()}}
+                            {{$report_product->onEachSide(1)->links()}}
                           </td>
                         </tr>
                       </tfoot>

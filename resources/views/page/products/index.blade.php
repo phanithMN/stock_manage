@@ -108,10 +108,10 @@
                       <tbody>
                         @foreach ($products as $product)
                           <tr role="row" class="odd">
+                          <td>{{$product->id}}</td>
                             <td style="text-align: center">
                               <img src="{{ asset('uploads/products/' . $product->image) }}" alt="banner" style="width: 40px;height: auto;">
                             </td>
-                            <td>{{$product->id}}</td>
                             <td>{{$product->name}}</td>
                             <td>{{$product->quantity}}</td>
                             <td>${{$product->cost_price}}</td>
