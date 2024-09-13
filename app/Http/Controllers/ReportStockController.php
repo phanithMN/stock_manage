@@ -22,7 +22,27 @@ class ReportStockController extends Controller
         $categories = Category::all();
         $status = Status::all();
 
-        $report_stocks = ReportStock::paginate($rowLength);
+        $rowLength = $request->query('row_length', 10);
+       
+
+
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $report_stocks = Stock::whereBetween('stocks.created_at', [
+                $request->input('start_date'), 
+                $request->input('end_date')
+            ])
+            ->where('products.name', 'like', '%'.$request->input('search').'%')
+            ->join('products', 'products.id', '=', 'stocks.product_id') 
+            ->join('status', 'status.id', '=', 'stocks.status_id') 
+            ->select('stocks.*', 'products.name as product_name', 'status.name as status_name')
+            ->paginate($rowLength);
+        } else {
+            $report_stocks = Stock::join('products', 'products.id', '=', 'stocks.product_id') 
+            ->join('status', 'status.id', '=', 'stocks.status_id')
+            ->select('stocks.*', 'products.name as product_name', 'status.name as status_name')
+            ->where('products.name', 'like', '%'.$request->input('search').'%')->paginate($rowLength);
+    
+        }
         return view('page.report-stock.index', [
             'report_stocks'=>$report_stocks,
             'categories'=>$categories,
@@ -51,27 +71,32 @@ class ReportStockController extends Controller
             // Add CSV headers
             fputcsv($handle, [
                 'ID',
+                'Date',
                 'Name',
-                'Category',
                 'Status',
-                'Created At',
+                'Price',
+                'Quantity',
+                'Total',
             ]);
     
-            Stock::with(['category', 'status'])->chunk(25, function ($stocks) use ($handle) {
+            Stock::with(['category', 'status', 'product'])->chunk(25, function ($stocks) use ($handle) {
                 foreach ($stocks as $stock) {
-                    // Extract data from each stock along with the joined category and status.
+                    // Extract data from each stock along with the joined product, category, and status.
                     $data = [
                         isset($stock->id) ? $stock->id : '',
-                        isset($stock->name) ? $stock->name : '',
-                        isset($stock->category->name) ? $stock->category->name : '', // Access category name
-                        isset($stock->status->name) ? $stock->status->name : '',     // Access status name
                         isset($stock->created_at) ? $stock->created_at->format('Y-m-d') : '',
+                        isset($stock->product->name) ? $stock->product->name : '',  // Product name
+                        isset($stock->status->name) ? $stock->status->name : '',    
+                        isset($stock->price) ? '$'.number_format($stock->price, 2) : '0',  
+                        isset($stock->quantity) ? $stock->quantity : '0',  
+                        isset($stock->quantity) ? '$'.number_format($stock->quantity * $stock->price, 2) : '0', 
                     ];
             
                     // Write data to a CSV file.
                     fputcsv($handle, $data);
                 }
             });
+            
     
             // Close CSV file handle
             fclose($handle);

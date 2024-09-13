@@ -167,3 +167,13 @@
   .table>tbody>tr>td, .table>tbody>tr>th {
     padding: 8px 12px !important;
   }
+
+  .dataTables_filter .input-filter {
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .bg-color-total td {
+    background: yellow;
+    font-weight: 600;
+  }
