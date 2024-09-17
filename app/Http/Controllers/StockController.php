@@ -15,7 +15,7 @@ class StockController extends Controller
         $stocks = Stock::join('products', 'stocks.product_id', '=', 'products.id') 
         ->join('status', 'stocks.status_id', '=' , 'status.id')
         ->select('stocks.*', 'products.name as product_name', 'status.name as status_name')
-        ->where('stocks.status', 'like', '%'.$request->query("status_name").'%')
+        ->where('stocks.name', 'like', '%'.$request->query("status_name").'%')
         ->where('products.name', 'like', '%'.$request->query("search").'%')
         ->orderBy('stocks.id', 'asc')
         ->paginate($rowLength);
