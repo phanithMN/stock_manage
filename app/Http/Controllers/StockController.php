@@ -6,18 +6,16 @@ use App\Models\Product;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use App\Models\Stock;
-use Illuminate\Support\Facades\DB;
 
 class StockController extends Controller
 {
     public function Stock(Request $request) {
         $status = Status::all();
         $rowLength = $request->query('row_length', 10);
-        $stocks = DB::table('stocks')
-        ->join('products', 'stocks.product_id', '=', 'products.id') 
-        ->join('status', 'stocks.status_id', '=', 'status.id') 
+        $stocks = Stock::join('products', 'stocks.product_id', '=', 'products.id') 
+        ->join('status', 'stocks.status_id', '=' , 'status.id')
         ->select('stocks.*', 'products.name as product_name', 'status.name as status_name')
-        ->where('status.name', 'like', '%'.$request->query("status_name").'%')
+        ->where('stocks.status', 'like', '%'.$request->query("status_name").'%')
         ->where('products.name', 'like', '%'.$request->query("search").'%')
         ->orderBy('stocks.id', 'asc')
         ->paginate($rowLength);
@@ -29,11 +27,9 @@ class StockController extends Controller
 
     public function Insert() {
         $products = Product::all();
-        $status = Status::all();
         return view('page.stocks.insert', 
         [
             'products'=>$products,
-            'status'=>$status
         ]);
     }
 
@@ -71,22 +67,26 @@ class StockController extends Controller
         ]);
     }
 
-    public function DataUpdate(Request $request, $id) {
+    public function DataUpdate(Request $request, $id)
+    {
         $stock = Stock::find($id);
-        $stock->quantity = $request->input('quantity');
+
+        // Update stock data (except quantity)
         $stock->price = $request->input('price');
         $stock->product_id = $request->input('product_id');
         $stock->status_id = $request->input('status_id');
-       
-        $stock->update();
+
+
+        // Find the related product
+        $product = Product::find($stock->product_id);
 
         $product = Product::find($stock->product_id); 
         if ($product) {
             $product->quantity += $stock->quantity; 
             $product->update();
         }
-        
-        return redirect()->route('stock')->with('message','Stock Updated Successfully');
+
+        return redirect()->route('stock')->with('message', 'Stock Updated Successfully');
     }
 
     // delete 

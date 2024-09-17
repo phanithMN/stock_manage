@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title') {{'Unit Of Measure'}} @endsection
+@section('title') {{'Unit'}} @endsection
 @section('content')
 
 <div class="container">

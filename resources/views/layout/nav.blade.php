@@ -57,7 +57,7 @@
             <li class="nav-item">
                 <a href="{{route('unit-of-measure')}}">
                     <i class="fas fa-boxes"></i>
-                    <p>Unit Of Measure</p>
+                    <p>Unit</p>
                 </a>
             </li>
             <li class="nav-section">

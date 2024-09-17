@@ -85,15 +85,14 @@
                                
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="status_id">Status <span class="text-danger">*</span></label>
-                                        <select class="form-select form-control" id="status_id" name="status_id" required>
+                                        <label for="status">Status <span class="text-danger">*</span></label>
+                                        <select class="form-select form-control" id="status" name="status" required>
                                             <option value="">Chosse Status</option>
-                                            @foreach($status as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
+                                            <option value="in">In</option>
+                                            <option value="out">Out</option>
                                         </select>
                                     </div>
-                                    @error('status_id')
+                                    @error('status')
                                         <span class="text-danger ml-2">{{ $message }}</span>
                                     @enderror
                                 </div>

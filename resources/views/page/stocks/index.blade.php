@@ -102,13 +102,13 @@
                             <td>{{$stock->id}}</td>
                             <td>{{$stock->sku}}</td>
                             <td>{{$stock->product_name}}</td>
-                            <td>${{$stock->price}}</td>
+                            <td>{{$stock->price}}៛</td>
                             <td>{{$stock->quantity}}</td>
-                            <td><span class="{{$stock->status_name == "Income" ? "color-income" : "color-return" }} status">{{$stock->status_name}}</span></td>
+                            <td><span class="{{$stock->status_name  == "in" ? "color-income" : "color-return" }} status">{{$stock->status }}</span></td>
                             <td>{{$stock->created_at}}</td>
                             <td>
                               <div class="form-button-action">
-                                <a  href="{{ route('update-stock', $stock->id) }} type="button" title="Edit Item" class="btn btn-link btn-primary btn-lg">
+                                <a  href="{{ route('update-stock', $stock->id) }}" type="button" title="Edit Item" class="btn btn-link btn-primary btn-lg">
                                   <i class="fa fa-edit"></i>
                                 </a>
                                 

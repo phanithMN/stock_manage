@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('image');
             $table->text('description')->nullable();
-            $table->decimal('quantity', 8, 2)->default(0);
+            $table->decimal('quantity', 8, 2)->nullable()->default(0);
             $table->decimal('price', 8, 2);
             $table->decimal('cost_price', 8, 2);
             $table->integer('category_id');

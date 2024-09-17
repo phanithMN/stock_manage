@@ -99,7 +99,7 @@
                           <th>Cost Price</th>
                           <th>Price</th>
                           <th>Category</th>
-                          <th>UOM</th>
+                          <th>Unit</th>
                           <th>Description</th>
                           <th>Created At</th>
                           <th class="w-1">Action</th>
