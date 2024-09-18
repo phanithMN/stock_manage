@@ -7,25 +7,25 @@
         <div class="page-header">
             <h3 class="fw-bold mb-3">@yield('title')</h3>
             <ul class="breadcrumbs mb-3">
-            <li class="nav-home">
-                <a href="#">
-                <i class="icon-home"></i>
-                </a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('stock')}}">Stock</a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">@yield('title')</a>
-            </li>
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('stock')}}">Stock</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">@yield('title')</a>
+                </li>
             </ul>
-            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -46,15 +46,25 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('product_id')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="price">Price <span class="text-danger">*</span></label>
+                                        <label for="reference_no">Reference No <span class="text-danger">*</span></label>
                                         <input
-                                        type="price"
+                                        type="type"
+                                        class="form-control"
+                                        id="reference_no"
+                                        name="reference_no"
+                                        placeholder="Enter Reference No"
+                                        required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="price">Price៛ <span class="text-danger">*</span></label>
+                                        <input
+                                        type="number"
                                         class="form-control"
                                         id="price"
                                         name="price"
@@ -62,15 +72,12 @@
                                         required
                                         />
                                     </div>
-                                    @error('price')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="quantity">Quantity <span class="text-danger">*</span></label>
                                         <input
-                                        type="quantity"
+                                        type="number"
                                         class="form-control"
                                         id="quantity"
                                         name="quantity"
@@ -78,9 +85,18 @@
                                         required
                                         />
                                     </div>
-                                    @error('quantity')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="date">Date At <span class="text-danger">*</span></label>
+                                        <input
+                                        type="date"
+                                        class="form-control"
+                                        id="date"
+                                        name="date"
+                                        required
+                                        />
+                                    </div>
                                 </div>
                                
                                 <div class="col-md-6 col-lg-6">
@@ -88,13 +104,12 @@
                                         <label for="status">Status <span class="text-danger">*</span></label>
                                         <select class="form-select form-control" id="status" name="status" required>
                                             <option value="">Chosse Status</option>
-                                            <option value="in">In</option>
-                                            <option value="out">Out</option>
+                                            <option value="1">In</option>
+                                            <option value="2">Out</option>
+                                            <option value="3">Spoiled</option>
+                                            <option value="4">Return</option>
                                         </select>
                                     </div>
-                                    @error('status')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">

@@ -66,7 +66,6 @@
                     <div id="add-row_filter" class="dataTables_filter">
                       <label>
                         <form action="{{ route('stock') }}" method="GET" id="reportForm">
-                          @csrf
                           <input 
                           type="search" 
                           name="search" 
@@ -87,12 +86,14 @@
                       <thead>
                         <tr role="row">
                           <th class="w-1">#</th>
-                          <th>SKU</th>
+                          <th>Reference No</th>
+                          <th>User ID</th>
                           <th>Product</th>
+                          <th>Status</th>
                           <th>Price</th>
                           <th>Quantity</th>
-                          <th>Status</th>
-                          <th>Created At</th>
+                          <th>Amount</th>
+                          <th>Date At</th>
                           <th class="w-1">Action</th>
                         </tr>
                       </thead>
@@ -100,18 +101,22 @@
                         @foreach ($stocks as $stock)
                           <tr role="row" class="odd">
                             <td>{{$stock->id}}</td>
-                            <td>{{$stock->sku}}</td>
+                            <td>{{$stock->reference_no}}</td>
+                            <td>{{$stock->user_id}}</td>
                             <td>{{$stock->product_name}}</td>
-                            <td>{{$stock->price}}៛</td>
-                            <td>{{$stock->quantity}}</td>
                             <td><span class="{{$stock->status_name  == "in" ? "color-income" : "color-return" }} status">{{$stock->status }}</span></td>
-                            <td>{{$stock->created_at}}</td>
+                            <td>{{number_format($stock->price, 2)}}៛</td>
+                            <td>{{$stock->quantity}}</td>
+                            <td>{{number_format($stock->amount, 2)}}៛</td>
+                            <td>{{\Carbon\Carbon::parse($stock->date)->format('Y-m-d')}}</td>
                             <td>
                               <div class="form-button-action">
-                                <a  href="{{ route('update-stock', $stock->id) }}" type="button" title="Edit Item" class="btn btn-link btn-primary btn-lg">
+                                <a  href="{{ route('update-stock', $stock->id) }}" type="button" title="Edit Item" class="mr-5 btn btn-link btn-primary btn-lg">
                                   <i class="fa fa-edit"></i>
                                 </a>
-                                
+                                <a  href="{{ route('update-stock', $stock->id) }}" type="button" title="Edit Item" class="btn btn-link btn-primary btn-lg">
+                                  <i class="fas fa-eye"></i>
+                                </a>
                               </div>
                             </td>
                           </tr>

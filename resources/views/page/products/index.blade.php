@@ -62,17 +62,18 @@
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6 d-flex fill-right">
-                    <div class="form-controll-fillter">
-                      <select class="form-select form-select-sm" id="category"  name="category">
-                        <option value="">Chosse Category</option>
-                        @foreach ($categories as $category )
-                        <option value="{{$category->name}}" {{ request('category') == $category->name ? 'selected' : '' }}>{{$category->name}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div id="add-row_filter" class="dataTables_filter">
-                      <label>
-                        <form action="{{ route('product') }}" method="GET" id="filterForm">
+                    
+                    <form action="{{ route('product') }}" method="GET" id="filterForm">
+                      <div id="add-row_filter" class="dataTables_filter d-flex">
+                        <div class="form-controll-fillter">
+                          <select class="form-select form-select-sm" id="category"  name="category" onchange="document.getElementById('filterForm').submit();" >
+                            <option value="">Chosse Category</option>
+                            @foreach ($categories as $category )
+                            <option value="{{$category->name}}" {{ request('category') == $category->name ? 'selected' : '' }}>{{$category->name}}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                        <div class="search">
                           <input 
                           type="search" 
                           name="search" 
@@ -82,9 +83,10 @@
                           value="{{$search_value}}"
                           onchange="document.getElementById('filterForm').submit();" 
                           />
-                        </form>
-                      </label>
-                    </div>
+                        </div>
+                      </div>
+                          
+                    </form>
                   </div>
                 </div>
                 <div class="row">

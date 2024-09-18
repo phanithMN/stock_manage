@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Status;
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\Stock;
 
@@ -12,13 +13,15 @@ class StockController extends Controller
     public function Stock(Request $request) {
         $status = Status::all();
         $rowLength = $request->query('row_length', 10);
-        $stocks = Stock::join('products', 'stocks.product_id', '=', 'products.id') 
-        ->join('status', 'stocks.status_id', '=' , 'status.id')
-        ->select('stocks.*', 'products.name as product_name', 'status.name as status_name')
-        ->where('status.name', 'like', '%'.$request->query("status_name").'%')
-        ->where('products.name', 'like', '%'.$request->query("search").'%')
+        $stocks = Stock::leftJoin('products', 'products.id', '=', 'stocks.product_id') 
+        ->select('stocks.*', 'products.name as product_name')
+        ->where(function($query) use ($request) {
+            $query->where('products.name', 'like', '%'.$request->query("search").'%')
+                  ->orWhereNull('products.name');
+        })
         ->orderBy('stocks.id', 'asc')
         ->paginate($rowLength);
+        
         return view('page.stocks.index', [
             'stocks'=>$stocks, 
             'status' => $status,
@@ -37,11 +40,15 @@ class StockController extends Controller
 
         $sku = $this->generateSku($request->input('product_id'));
         $stock = new Stock();
+        $stock->user_id = Auth::id();
+        $stock->reference_no = $request->input('reference_no');
         $stock->quantity = $request->input('quantity');
         $stock->price = $request->input('price');
         $stock->product_id = $request->input('product_id');
+        $stock->date = $request->input('date');
         $stock->sku = $sku;
-        $stock->status_id = $request->input('status_id');
+        $stock->status = $request->input('status');
+        $stock->amount = $request->input('quantity') * $request->input('price');
 
         $stock->save();
 
@@ -69,23 +76,51 @@ class StockController extends Controller
 
     public function DataUpdate(Request $request, $id)
     {
+        // Find the stock item
         $stock = Stock::find($id);
-
-        // Update stock data (except quantity)
+    
+        // Store the original quantity and status
+        $originalQuantity = $stock->quantity;
+        $originalStatus = $stock->status;
+    
+        // Update the stock item with new values
+        $stock->reference_no = $request->input('reference_no');
+        $stock->quantity = $request->input('quantity');
         $stock->price = $request->input('price');
         $stock->product_id = $request->input('product_id');
-        $stock->status_id = $request->input('status_id');
-
-
-        // Find the related product
+        $stock->status = $request->input('status');
+        $stock->date = $request->input('date');
+        $stock->amount = $request->input('quantity') * $request->input('price');
+        $stock->update(); // Use save() instead of update()
+    
+        // Update quantity on product
         $product = Product::find($stock->product_id);
-
-        $product = Product::find($stock->product_id); 
+        
         if ($product) {
-            $product->quantity += $stock->quantity; 
+            // Determine how to adjust the quantity based on status
+            if ($originalStatus == '1' || $originalStatus == '2') {
+                // Calculate the quantity change based on the original status
+                if ($originalStatus == '1') {
+                    $product->quantity += $originalQuantity;
+                } elseif ($originalStatus == '2') {
+                    $product->quantity -= $originalQuantity;
+                }
+            }
+    
+            // Apply new quantity based on the updated status
+            if ($request->input('status') == '1') {
+                // Increase product quantity
+                $product->quantity += $request->input('quantity');
+            } elseif ($request->input('status') == '2') {
+                // Decrease product quantity
+                $product->quantity -= $request->input('quantity');
+            }
+    
+            // Ensure product quantity doesn't go negative
+            $product->quantity = max($product->quantity, 0);
             $product->update();
         }
-
+    
         return redirect()->route('stock')->with('message', 'Stock Updated Successfully');
     }
 

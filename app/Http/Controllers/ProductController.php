@@ -3,32 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Status;
-use Illuminate\Support\Facades\DB;
 use App\Models\UnitOfMeasure;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Stock;
 
 class ProductController extends Controller
 {
     public function Product(Request $request) {
-        $status = Status::all();
         $categories = Category::all();
         $search_value = $request->query("search");
         $rowLength = $request->query('row_length', 10);
-        $products = DB::table('products')
-            ->join('categories', 'products.category_id', '=', 'categories.id') 
-            ->join('unit_of_measure', 'products.uom_id', '=', 'unit_of_measure.id') 
+        $products = Product::leftJoin('categories', 'products.category_id', '=', 'categories.id') 
+            ->leftJoin('unit_of_measure', 'products.uom_id', '=', 'unit_of_measure.id') 
             ->select('products.*', 'categories.name as category_name', 'unit_of_measure.unit as uom_unit')
             ->where('products.name', 'like', '%'.$request->input('search').'%')
-            ->where('categories.name', 'like', '%'.$request->query("category").'%')
+            ->where(function($query) use ($request) {
+                $query->where('categories.name', 'like', '%'.$request->query("category").'%')->orWhereNull('categories.name');
+            })
             ->paginate($rowLength);
+
 
         return view('page.products.index', [
             'products'=>$products, 
             'search_value'=>$search_value,
-            'status'=>$status,
             'categories'=>$categories
         ]);
     }

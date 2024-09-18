@@ -47,57 +47,74 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('product_id')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="price">Price <span class="text-danger">*</span></label>
+                                        <label for="reference_no">Reference No <span class="text-danger">*</span></label>
                                         <input
-                                        type="price"
+                                        type="type"
+                                        class="form-control"
+                                        id="reference_no"
+                                        name="reference_no"
+                                        placeholder="Enter Reference No"
+                                        value="{{$stock->reference_no}}"
+                                        required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="price">Price៛ <span class="text-danger">*</span></label>
+                                        <input
+                                        type="number"
                                         class="form-control"
                                         id="price"
                                         name="price"
                                         placeholder="Enter Price"
-                                        value="{{$stock->price}}"
+                                         value="{{$stock->price}}"
                                         required
                                         />
                                     </div>
-                                    @error('price')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="quantity">Quantity <span class="text-danger">*</span></label>
                                         <input
-                                        type="quantity"
+                                        type="number"
                                         class="form-control"
                                         id="quantity"
                                         name="quantity"
                                         placeholder="Enter Quantity"
-                                        value="{{$stock->quantity}}"
+                                         value="{{$stock->quantity}}"
                                         required
                                         />
                                     </div>
-                                    @error('quantity')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="date">Date At <span class="text-danger">*</span></label>
+                                        <input
+                                        type="date"
+                                        class="form-control"
+                                        id="date"
+                                        name="date"
+                                        value="{{\Carbon\Carbon::parse($stock->date)->format('Y-m-d') }}"
+                                        required
+                                        />
+                                    </div>
+                                </div>
+                               
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="status">Status <span class="text-danger">*</span></label>
                                         <select class="form-select form-control" id="status" name="status" required>
                                             <option value="">Chosse Status</option>
-                                            <option value="in"  {{$stock->status == 'in' ? 'selected' : '' }}>In</option>
-                                            <option value="out" {{$stock->status == 'out' ? 'selected' : '' }}>Out</option>
-                                           
+                                            <option value="1" {{$stock->status == '1' ? 'selected' : '' }}>In</option>
+                                            <option value="2" {{$stock->status == '2' ? 'selected' : '' }}>Out</option>
+                                            <option value="3" {{$stock->status == '3' ? 'selected' : '' }}>Spoiled</option>
+                                            <option value="4" {{$stock->status == '4' ? 'selected' : '' }}>Return</option>
                                         </select>
                                     </div>
-                                    @error('status')
-                                        <span class="text-danger ml-2">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
@@ -107,7 +124,7 @@
                                             name="sku"
                                             class="form-control"
                                             id="sku"
-                                            value="{{$stock->sku}}"
+                                            value="SKU Auto Generate"
                                             placeholder="SKU Auto Generate"
                                             disabled
                                         />

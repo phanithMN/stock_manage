@@ -111,10 +111,6 @@
     padding: 0;
   }
   
-  .fill-right .form-controll-fillter {
-    width: 30%;
-    margin: 0 5px;
-  }
 
   .form-button-action {
     display: flex;
@@ -176,4 +172,8 @@
   .bg-color-total td {
     background: yellow;
     font-weight: 600;
+  }
+
+  .mr-5 {
+    margin-right: 5px;
   }
