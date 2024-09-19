@@ -55,28 +55,47 @@
                   </div>
                   <div class="col-sm-12 col-md-6 d-flex fill-right">
                    
-                    <div class="form-controll-fillter">
-                      <select class="form-select form-select-sm" id="status_name"  name="status_name">
-                        <option value="">Chosse Status</option>
-                        @foreach ($status as $status_item )
-                        <option value="{{$status_item->name}}" {{ request('status_name') == $status_item->name ? 'selected' : '' }}>{{$status_item->name}}</option>
-                        @endforeach
-                      </select>
-                    </div>
+                    
                     <div id="add-row_filter" class="dataTables_filter">
-                      <label>
-                        <form action="{{ route('stock') }}" method="GET" id="reportForm">
+                      <form action="{{ route('stock') }}" method="GET" id="formFilter">
+                        <div class="form-controll-fillter d-flex">
+                        <div class="input-filter d-flex">
+                            <label for="start_date">Start Date:</label>
+                            <input type="date" id="start_date" name="start_date"
+                            class="form-control form-control-sm"
+                            value="{{ request('start_date') }}"
+                            onchange="document.getElementById('formFilter').submit();">
+                        </div>
+
+                        <div class="input-filter d-flex">
+                            <label for="end_date">End Date:</label>
+                            <input type="date" id="end_date" name="end_date"
+                            class="form-control form-control-sm"
+                            value="{{ request('end_date') }}"
+                            onchange="document.getElementById('formFilter').submit();">
+                        </div>
+                          <select class="form-select form-select-sm" 
+                          id="status_name"  name="status_name"
+                          onchange="document.getElementById('formFilter').submit();"
+                          >
+                            <option value="">Chosse Status</option>
+                            <option value="1" {{ request('status_name') == '1' ? 'selected' : '' }}>In</option>
+                            <option value="2" {{ request('status_name') == '2' ? 'selected' : '' }}>Out</option>
+                            <option value="3" {{ request('status_name') == '3' ? 'selected' : '' }}>Spoiled</option>
+                            <option value="4" {{ request('status_name') == '4' ? 'selected' : '' }}>Return</option>
+                          </select>
                           <input 
-                          type="search" 
-                          name="search" 
-                          class="form-control form-control-sm" 
-                          placeholder="Search..." 
-                          aria-label="Search..." 
-                          value="{{request('search')}}"
-                          onchange="document.getElementById('reportForm').submit();" 
-                          />
-                        </form>
-                      </label>
+                            type="search" 
+                            name="search" 
+                            class="form-control form-control-sm" 
+                            placeholder="Search..." 
+                            aria-label="Search..." 
+                            value="{{request('search')}}"
+                            onchange="document.getElementById('formFilter').submit();" 
+                            />
+                        </div>
+                       
+                      </form>
                     </div>
                   </div>
                 </div>

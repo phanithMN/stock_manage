@@ -47,22 +47,6 @@
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-10 d-flex fill-right">
-                    <!-- <div class="form-controll-fillter">
-                      <select class="form-select form-select-sm" id="category"  name="category">
-                        <option value="">Chosse Category</option>
-                        @foreach ($categories as $category )
-                        <option value="{{$category->name}}" {{ request('category') == $category->name ? 'selected' : '' }}>{{$category->name}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="form-controll-fillter">
-                      <select class="form-select form-select-sm" id="status_name"  name="status_name">
-                        <option value="">Chosse Status</option>
-                        @foreach ($status as $status_item )
-                        <option value="{{$status_item->name}}" {{ request('status_name') == $status_item->name ? 'selected' : '' }}>{{$status_item->name}}</option>
-                        @endforeach
-                      </select>
-                    </div> -->
                     <div id="add-row_filter" class="dataTables_filter">
                       <form action="{{ route('report-product') }}" method="GET" class="d-flex" id="filterForm">
                         <div class="input-filter d-flex">

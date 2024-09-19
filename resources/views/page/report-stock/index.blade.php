@@ -104,6 +104,7 @@
                     <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                       <thead>
                         <tr role="row">
+                          <th>Reference No</th>
                           <th>Name</th>
                           <th>Status</th>
                           <th>Date</th>
@@ -118,17 +119,18 @@
                         @else
                           @foreach ($report_stocks as $item)
                             <tr role="row" class="odd">
-                                <td>{{ $item->product_name }}</td>
-                                <td><span class="{{ $item->status_name == 'Income' ? 'color-income' : 'color-return' }} status">{{ $item->status_name }}</span></td>
-                                <td>{{ $item->created_at->format('Y-m-d') }}</td>
-                                <td>${{number_format($item->price, 2)}}</td>
-                                <td>{{$item->quantity}}</td>
-                                <td>${{number_format($item->quantity * $item->price, 2)}}</td>
+                              <td>{{ $item->reference_no }}</td>
+                              <td>{{ $item->product_name }}</td>
+                              <td><span class="{{ $item->status == 'Income' ? 'color-income' : 'color-return' }} status">{{ $item->status }}</span></td>
+                              <td>{{ $item->created_at->format('Y-m-d') }}</td>
+                              <td>${{number_format($item->price, 2)}}</td>
+                              <td>{{$item->quantity}}</td>
+                              <td>${{number_format($item->quantity * $item->price, 2)}}</td>
                             </tr>
                           @endforeach
                         @endif
                         <tr role="row" class="odd bg-color-total">
-                          <td colspan="3" class="text-center">Sub Total</td>
+                          <td colspan="4" class="text-center">Sub Total</td>
                           <td>${{number_format($report_stocks->sum('price'), 2)}}</td>
                           <td>{{$report_stocks->sum('quantity')}}</td>
                           <td>${{number_format($report_stocks->sum('quantity') * $report_stocks->sum('price'), 2)}}</td>

@@ -177,3 +177,7 @@
   .mr-5 {
     margin-right: 5px;
   }
+
+  .form-controll-fillter .form-select-sm {
+    width: 150px;
+  }

@@ -13,11 +13,18 @@ class StockController extends Controller
     public function Stock(Request $request) {
         $status = Status::all();
         $rowLength = $request->query('row_length', 10);
-        $stocks = Stock::leftJoin('products', 'products.id', '=', 'stocks.product_id') 
+        $stocks = Stock::leftJoin('products', 'products.id', '=', 'stocks.product_id')
         ->select('stocks.*', 'products.name as product_name')
         ->where(function($query) use ($request) {
             $query->where('products.name', 'like', '%'.$request->query("search").'%')
                   ->orWhereNull('products.name');
+        })
+        ->where(function($query) use ($request) {
+            $query->where('stocks.status', 'like', '%'.$request->query("status_name").'%')
+                  ->orWhereNull('stocks.status');
+        })
+        ->when($request->has('start_date') && $request->has('end_date'), function ($query) use ($request) {
+            $query->whereBetween('stocks.date', [$request->query('start_date'), $request->query('end_date')]);
         })
         ->orderBy('stocks.id', 'asc')
         ->paginate($rowLength);

@@ -33,13 +33,11 @@ class ReportStockController extends Controller
             ])
             ->where('products.name', 'like', '%'.$request->input('search').'%')
             ->join('products', 'products.id', '=', 'stocks.product_id') 
-            ->join('status', 'status.id', '=', 'stocks.status_id') 
-            ->select('stocks.*', 'products.name as product_name', 'status.name as status_name')
+            ->select('stocks.*', 'products.name as product_name')
             ->paginate($rowLength);
         } else {
             $report_stocks = Stock::join('products', 'products.id', '=', 'stocks.product_id') 
-            ->join('status', 'status.id', '=', 'stocks.status_id')
-            ->select('stocks.*', 'products.name as product_name', 'status.name as status_name')
+            ->select('stocks.*', 'products.name as product_name')
             ->where('products.name', 'like', '%'.$request->input('search').'%')
             ->whereDate('stocks.created_at', Carbon::today()) 
             ->paginate($rowLength);
