@@ -14,10 +14,7 @@ class AddColumnFromStocksTable extends Migration
     public function up()
     {
         Schema::table('stocks', function (Blueprint $table) {
-            $table->decimal('amount', 8, 2);
-            $table->timestamp('date')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->bigInteger('user_id');
-            $table->string('reference_no');
+            $table->string('status')->nullable();
         });
     }
 
@@ -29,7 +26,7 @@ class AddColumnFromStocksTable extends Migration
     public function down()
     {
         Schema::table('stocks', function (Blueprint $table) {
-            //
+            
         });
     }
 }
