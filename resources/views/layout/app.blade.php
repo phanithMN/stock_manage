@@ -19,7 +19,6 @@
       href="/assets/img/kaiadmin/favicon.ico"
       type="image/x-icon"
     />
-
     <!-- Fonts and icons -->
     <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
@@ -39,21 +38,18 @@
         },
       });
     </script>
-
     <!-- CSS Files -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/assets/css/plugins.min.css" />
     <link rel="stylesheet" href="/assets/css/kaiadmin.min.css" />
     <!-- custom  -->
     <link rel="stylesheet" href="/assets/css/custom.css" />
-
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="/assets/css/demo.css" />
     <!-- sweet alert  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- select Picker  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+    <!-- Include Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   </head>
   <body>
 
@@ -266,41 +262,41 @@
     <script src="/assets/js/core/jquery-3.7.1.min.js"></script>
     <script src="/assets/js/core/popper.min.js"></script>
     <script src="/assets/js/core/bootstrap.min.js"></script>
-
     <!-- jQuery Scrollbar -->
     <script src="/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-
     <!-- Chart JS -->
     <script src="/assets/js/plugin/chart.js/chart.min.js"></script>
-
     <!-- jQuery Sparkline -->
     <script src="/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
-
     <!-- Chart Circle -->
     <script src="/assets/js/plugin/chart-circle/circles.min.js"></script>
-
     <!-- Datatables -->
     <script src="/assets/js/plugin/datatables/datatables.min.js"></script>
-
     <!-- Bootstrap Notify -->
     <script src="/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-
     <!-- jQuery Vector Maps -->
     <script src="/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
     <script src="/assets/js/plugin/jsvectormap/world.js"></script>
-
     <!-- Sweet Alert -->
     <script src="/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
-
     <!-- Kaiadmin JS -->
     <script src="/assets/js/kaiadmin.min.js"></script>
-
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="/assets/js/setting-demo.js"></script>
-    <script src="/assets/js/demo.js"></script>
     <!-- custom js  -->
     <script src="/assets/js/custom.js"></script>
-    
+    <!-- select 2  start-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#product_id').select2({
+                placeholder: 'Choose Product',
+                allowClear: true
+            });
+        });
+    </script>
+    <!-- select 2 end -->
     <!-- message success  -->
     @if (Session::has('message'))
         <script>
@@ -332,11 +328,6 @@
             })
         }
     </script>
-    <!-- select picker  -->
-    <script>
-      $(document).ready(function() {
-        $('#product_id').select2();
-      })
-    </script>
+   
   </body>
 </html>

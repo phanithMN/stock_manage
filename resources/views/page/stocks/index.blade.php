@@ -133,7 +133,12 @@
                                 <a  href="{{ route('update-stock', $stock->id) }}" type="button" title="Edit Item" class="mr-5 btn btn-link btn-primary btn-lg">
                                   <i class="fa fa-edit"></i>
                                 </a>
-                                <a  href="{{ route('update-stock', $stock->id) }}" type="button" title="Edit Item" class="btn btn-link btn-primary btn-lg">
+                                <a  href="#"
+                                type="button" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#detailModal" 
+                                data-id="{{ $stock->id }}"
+                                title="Quick View" class="btn btn-link btn-primary btn-lg">
                                   <i class="fas fa-eye"></i>
                                 </a>
                               </div>
@@ -154,6 +159,24 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Structure -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailModalLabel">Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Content will be loaded here -->
+        <div id="modal-detail-content">
+          <p>Status: <strong class="status"></strong></p>
         </div>
       </div>
     </div>

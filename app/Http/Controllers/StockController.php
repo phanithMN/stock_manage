@@ -141,6 +141,15 @@ class StockController extends Controller
         }
     }
 
+    public function getItemDetails($id)
+    {
+        $stock_detail = Stock::findOrFail($id);
+
+
+        // Return a partial view with the item details
+        return view('page.stocks.index', ['stock_detail' => $stock_detail]);
+    }
+
     private function generateSku($productName)
     {
         // Get the initials of the product name
