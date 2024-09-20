@@ -52,14 +52,13 @@
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="image">Image <span class="text-danger">*</span></label>
+                                        <label for="image">Image (Optional) </label>
                                         <input
                                         type="file"
                                         class="form-control"
                                         id="image"
                                         name="image"
                                         placeholder="Enter Image"
-                                        required
                                         />
                                     </div>
                                 </div>

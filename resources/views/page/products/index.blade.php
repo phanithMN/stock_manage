@@ -116,12 +116,12 @@
                             </td>
                             <td>{{$product->name}}</td>
                             <td>{{$product->quantity}}</td>
-                            <td>${{$product->cost_price}}</td>
-                            <td>${{$product->price}}</td>
+                            <td>{{$product->cost_price}}៛</td>
+                            <td>{{$product->price}}៛</td>
                             <td>{{$product->category_name}}</td>
                             <td>{{$product->uom_unit}}</td>
                             <td>{{$product->description}}</td>
-                            <td>{{$product->created_at}}</td>
+                            <td>{{\Carbon\Carbon::parse($product->created_at)->format('Y-m-d')}}</td>
                             <td>
                               <div class="form-button-action">
                                 <a  href="{{ route('update-product', $product->id) }} type="button" title="Edit Item" class="btn btn-link btn-primary btn-lg">

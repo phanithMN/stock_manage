@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnFromStocksTable extends Migration
+class DropColumnFromProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnFromStocksTable extends Migration
      */
     public function up()
     {
-        Schema::table('stocks', function (Blueprint $table) {
-            $table->string('status')->nullable();
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('image');
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnFromStocksTable extends Migration
      */
     public function down()
     {
-        Schema::table('stocks', function (Blueprint $table) {
-            
+        Schema::table('products', function (Blueprint $table) {
+            //
         });
     }
 }
