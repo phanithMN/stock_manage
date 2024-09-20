@@ -130,16 +130,16 @@
                             <td>{{\Carbon\Carbon::parse($stock->date)->format('Y-m-d')}}</td>
                             <td>
                               <div class="form-button-action">
-                                <a  href="{{ route('update-stock', $stock->id) }}" type="button" title="Edit Item" class="mr-5 btn btn-link btn-primary btn-lg">
-                                  <i class="fa fa-edit"></i>
-                                </a>
-                                <a  href="#"
+                                <a href="javascript:voide(0)"
                                 type="button" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#detailModal" 
                                 data-id="{{ $stock->id }}"
-                                title="Quick View" class="btn btn-link btn-primary btn-lg">
+                                title="Quick View" class="btn btn-link btn-primary btn-lg mr-5">
                                   <i class="fas fa-eye"></i>
+                                </a>
+                                <a  href="{{ route('update-stock', $stock->id) }}" type="button" title="Edit Item" class=" btn btn-link btn-primary btn-lg">
+                                  <i class="fa fa-edit"></i>
                                 </a>
                               </div>
                             </td>
@@ -165,19 +165,20 @@
   </div>
 </div>
 
-<!-- Modal Structure -->
+<!-- Modal -->
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="detailModalLabel">Detail</h5>
+        <h5 class="modal-title" id="detailModalLabel">Stock Detail</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- Content will be loaded here -->
-        <div id="modal-detail-content">
-          <p>Status: <strong class="status"></strong></p>
-        </div>
+        <!-- Product Details will be dynamically injected here -->
+        <p><strong>Product Name:</strong> <span id="productName"></span></p>
+        <p><strong>Category:</strong> <span id="categoryName"></span></p>
+        <p><strong>Unit of Measure:</strong> <span id="uomUnit"></span></p>
+        <p><strong>Stock Quantity:</strong> <span id="stockQuantity"></span></p>
       </div>
     </div>
   </div>

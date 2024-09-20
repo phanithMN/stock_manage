@@ -26,3 +26,5 @@ document.getElementById('add_row_length').addEventListener('change', function() 
 $(document).ready(function() {
     $('#product_id').select2();
 })
+
+

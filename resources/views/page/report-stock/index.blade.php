@@ -123,17 +123,17 @@
                               <td>{{ $item->product_name }}</td>
                               <td><span class="{{ $item->status == 'Income' ? 'color-income' : 'color-return' }} status">{{ $item->status }}</span></td>
                               <td>{{ $item->created_at->format('Y-m-d') }}</td>
-                              <td>${{number_format($item->price, 2)}}</td>
+                              <td>{{number_format($item->price, 2)}}៛</td>
                               <td>{{$item->quantity}}</td>
-                              <td>${{number_format($item->quantity * $item->price, 2)}}</td>
+                              <td>{{number_format($item->quantity * $item->price, 2)}} ៛</td>
                             </tr>
                           @endforeach
                         @endif
                         <tr role="row" class="odd bg-color-total">
                           <td colspan="4" class="text-center">Sub Total</td>
-                          <td>${{number_format($report_stocks->sum('price'), 2)}}</td>
+                          <td>{{number_format($report_stocks->sum('price'), 2)}}៛</td>
                           <td>{{$report_stocks->sum('quantity')}}</td>
-                          <td>${{number_format($report_stocks->sum('quantity') * $report_stocks->sum('price'), 2)}}</td>
+                          <td>{{number_format($report_stocks->sum('quantity') * $report_stocks->sum('price'), 2)}}៛</td>
                         </tr>
                       </tbody>
                       <tfoot>

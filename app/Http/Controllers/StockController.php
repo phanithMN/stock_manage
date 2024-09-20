@@ -141,13 +141,11 @@ class StockController extends Controller
         }
     }
 
-    public function getItemDetails($id)
+    public function show($id)
     {
-        $stock_detail = Stock::findOrFail($id);
+        $stock = Stock::findOrFail($id);
 
-
-        // Return a partial view with the item details
-        return view('page.stocks.index', ['stock_detail' => $stock_detail]);
+        return response()->json($stock); // Return as JSON for AJAX
     }
 
     private function generateSku($productName)
