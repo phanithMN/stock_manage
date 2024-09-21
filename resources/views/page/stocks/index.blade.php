@@ -29,11 +29,12 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">
-            <div class="d-flex align-items-center">
+          <div class="card-header"> 
+            <div class="d-flex align-items-center justify-content-between">
               <h4 class="card-title">@yield('title') Table</h4>
               <a href="{{route('insert-stock')}}" class="btn btn-primary btn-round ms-auto">
-                <i class="fa fa-plus"></i> Add New </a>
+                <i class="fa fa-plus"></i> Add New 
+              </a>
             </div>
           </div>
           <div class="card-body">
@@ -79,10 +80,10 @@
                           onchange="document.getElementById('formFilter').submit();"
                           >
                             <option value="">Chosse Status</option>
-                            <option value="1" {{ request('status_name') == '1' ? 'selected' : '' }}>In</option>
-                            <option value="2" {{ request('status_name') == '2' ? 'selected' : '' }}>Out</option>
-                            <option value="3" {{ request('status_name') == '3' ? 'selected' : '' }}>Spoiled</option>
-                            <option value="4" {{ request('status_name') == '4' ? 'selected' : '' }}>Return</option>
+                            <option value="In" {{ request('status_name') == 'In' ? 'selected' : '' }}>In</option>
+                            <option value="In" {{ request('status_name') == 'In' ? 'selected' : '' }}>In</option>
+                            <option value="Spoiled" {{ request('status_name') == 'Spoiled' ? 'selected' : '' }}>Spoiled</option>
+                            <option value="Return" {{ request('status_name') == 'Return' ? 'selected' : '' }}>Return</option>
                           </select>
                           <input 
                             type="search" 
@@ -123,7 +124,7 @@
                             <td>{{$stock->reference_no}}</td>
                             <td>{{$stock->user_id}}</td>
                             <td>{{$stock->product_name}}</td>
-                            <td><span class="{{$stock->status_name  == "in" ? "color-income" : "color-return" }} status">{{$stock->status }}</span></td>
+                            <td><span class="{{$stock->status  == "In" ? "color-in" : "color-out" }} status">{{$stock->status }}</span></td>
                             <td>{{number_format($stock->price, 2)}}៛</td>
                             <td>{{$stock->quantity}}</td>
                             <td>{{number_format($stock->amount, 2)}}៛</td>

@@ -104,10 +104,10 @@
                                         <label for="status">Status <span class="text-danger">*</span></label>
                                         <select class="form-select form-control" id="status" name="status" required>
                                             <option value="">Chosse Status</option>
-                                            <option value="1">In</option>
-                                            <option value="2">Out</option>
-                                            <option value="3">Spoiled</option>
-                                            <option value="4">Return</option>
+                                            <option value="In">In</option>
+                                            <option value="Out">Out</option>
+                                            <option value="Spoiled">Spoiled</option>
+                                            <option value="Return">Return</option>
                                         </select>
                                     </div>
                                 </div>

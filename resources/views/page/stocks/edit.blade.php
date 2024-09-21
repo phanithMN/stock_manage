@@ -109,10 +109,10 @@
                                         <label for="status">Status <span class="text-danger">*</span></label>
                                         <select class="form-select form-control" id="status" name="status" required>
                                             <option value="">Chosse Status</option>
-                                            <option value="1" {{$stock->status == '1' ? 'selected' : '' }}>In</option>
-                                            <option value="2" {{$stock->status == '2' ? 'selected' : '' }}>Out</option>
-                                            <option value="3" {{$stock->status == '3' ? 'selected' : '' }}>Spoiled</option>
-                                            <option value="4" {{$stock->status == '4' ? 'selected' : '' }}>Return</option>
+                                            <option value="In" {{$stock->status == 'In' ? 'selected' : '' }}>In</option>
+                                            <option value="Out" {{$stock->status == 'Out' ? 'selected' : '' }}>Out</option>
+                                            <option value="Spoiled" {{$stock->status == 'Spoiled' ? 'selected' : '' }}>Spoiled</option>
+                                            <option value="Return" {{$stock->status == 'Return' ? 'selected' : '' }}>Return</option>
                                         </select>
                                     </div>
                                 </div>

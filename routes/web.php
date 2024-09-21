@@ -55,7 +55,6 @@ Route::get('/edit-stock/{id}', [App\Http\Controllers\StockController::class, 'Up
 Route::put('/edit-data-stock/{id}', [App\Http\Controllers\StockController::class, 'DataUpdate'])->name('edit-data-stock');
 Route::get('/delete-stock/{id}', [App\Http\Controllers\StockController::class, 'Delete'])->name('delete-stock');
 Route::get('/stock-detail/{id}', [App\Http\Controllers\StockController::class, 'show'])->name('stock-detail');
-
 // user
 Route::get('/user', [App\Http\Controllers\UserController::class, 'User'])->name('user');
 Route::get('/insert-user', [App\Http\Controllers\UserController::class, 'Insert'])->name('insert-user');

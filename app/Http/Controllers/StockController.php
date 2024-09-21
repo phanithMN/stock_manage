@@ -86,10 +86,6 @@ class StockController extends Controller
         // Find the stock item
         $stock = Stock::find($id);
     
-        // Store the original quantity and status
-        $originalQuantity = $stock->quantity;
-        $originalStatus = $stock->status;
-    
         // Update the stock item with new values
         $stock->reference_no = $request->input('reference_no');
         $stock->quantity = $request->input('quantity');
@@ -104,21 +100,11 @@ class StockController extends Controller
         $product = Product::find($stock->product_id);
         
         if ($product) {
-            // Determine how to adjust the quantity based on status
-            if ($originalStatus == '1' || $originalStatus == '2') {
-                // Calculate the quantity change based on the original status
-                if ($originalStatus == '1') {
-                    $product->quantity += $originalQuantity;
-                } elseif ($originalStatus == '2') {
-                    $product->quantity -= $originalQuantity;
-                }
-            }
-    
             // Apply new quantity based on the updated status
-            if ($request->input('status') == '1') {
+            if ($request->input('status') == 'In') {
                 // Increase product quantity
                 $product->quantity += $request->input('quantity');
-            } elseif ($request->input('status') == '2') {
+            } elseif ($request->input('status') == 'Out') {
                 // Decrease product quantity
                 $product->quantity -= $request->input('quantity');
             }
@@ -159,6 +145,8 @@ class StockController extends Controller
         // Concatenate to form the SKU
         return $initials . '-' . $randomNumber . '-' . $timestamp;
     }
+
+    // insert stock out 
 
     
 }

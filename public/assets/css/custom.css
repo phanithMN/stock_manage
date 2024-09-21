@@ -86,13 +86,13 @@
     font-weight: 600;
   }
 
-  .color-return {
+  .color-out {
     background: #177dff29 !important;
     color: #177dff;
     padding: 5px 10px;
   }
 
-  .color-income {
+  .color-in {
     background: #fdaf4b29 !important;
     padding: 5px 10px;
     color: #fdaf4b ;
