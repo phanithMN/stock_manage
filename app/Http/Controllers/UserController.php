@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -43,8 +44,12 @@ class UserController extends Controller
     public function Update($id) {
 
         $user = User::find($id);
+        $roles = Role::orderBy('name', 'ASC')->get();
 
-        return view('page.users.edit', ['user' => $user]);
+        return view('page.users.edit', [
+            'user' => $user,
+            'roles' => $roles
+        ]);
     }
 
     public function DataUpdate(Request $request, $id) {

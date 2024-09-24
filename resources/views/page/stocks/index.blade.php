@@ -81,7 +81,7 @@
                           >
                             <option value="">Chosse Status</option>
                             <option value="In" {{ request('status_name') == 'In' ? 'selected' : '' }}>In</option>
-                            <option value="In" {{ request('status_name') == 'In' ? 'selected' : '' }}>In</option>
+                            <option value="Out" {{ request('status_name') == 'Out' ? 'selected' : '' }}>Out</option>
                             <option value="Spoiled" {{ request('status_name') == 'Spoiled' ? 'selected' : '' }}>Spoiled</option>
                             <option value="Return" {{ request('status_name') == 'Return' ? 'selected' : '' }}>Return</option>
                           </select>

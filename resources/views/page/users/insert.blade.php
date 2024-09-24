@@ -117,6 +117,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-action section-permission">
+                                <div class="form-group d-flex">
+                                    <label class="form-label" for="">Test</label>
+                                    <input 
+                                    id="" 
+                                    type="checkbox" 
+                                    name=""  
+                                    >
+                                </div>
+                            </div>
                             
                             <div class="card-action">
                                 <button class="btn btn-success" type="submit">Submit</button>

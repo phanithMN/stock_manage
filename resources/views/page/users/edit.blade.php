@@ -99,7 +99,25 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            <div class="card-action section-role">
+                                <div class="card-title mt-3">Asign Role</div>
+                                <div class="d-flex">
+                                    @if ($roles->isNotEmpty())
+                                        @foreach ($roles as $role )
+                                            <div class="form-group d-flex">
+                                                <input 
+                                                id="role-{{$role->id}}" 
+                                                type="checkbox" 
+                                                class="mr-5 rounded"
+                                                name="role[]"  
+                                                value="{{$role->name}}"
+                                                > 
+                                                <label class="form-label" for="role-{{$role->id}}">{{$role->name}}</label>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
                             <div class="card-action">
                                 <button class="btn btn-success" type="submit">Submit</button>
                                 <button class="btn btn-danger" onclick="history.back(); return false;">Cancel</button>

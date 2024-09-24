@@ -204,17 +204,10 @@
   width: 10px;
 }
 
-/* Track */
-/* .scrollbar-inner::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-} */
- 
-/* Handle */
-/* .scrollbar-inner::-webkit-scrollbar-thumb {
-  background: #888; 
-} */
+.section-role {
+  padding: 0px !important;
+}
 
-/* Handle on hover */
-/* .scrollbar-inner::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-} */
+.section-role label {
+  margin: 0 !important;
+}
