@@ -25,7 +25,7 @@
                 <a href="#">@yield('title')</a>
             </li>
             </ul>
-            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -54,7 +54,25 @@
                                     @enderror
                                 </div>
                             </div>
-                            
+                            <div class="card-action section-role">
+                                <div class="card-title mt-3">Asign Permission</div>
+                                <div class="d-flex">
+                                    @if ($permissions->isNotEmpty())
+                                        @foreach ($permissions as $permission )
+                                            <div class="form-group d-flex">
+                                                <input 
+                                                id="role-{{$permission->id}}" 
+                                                type="checkbox" 
+                                                class="mr-5 rounded"
+                                                name="role[]"  
+                                                value="{{$permission->name}}"
+                                                > 
+                                                <label class="form-label" for="role-{{$permission->id}}">{{$permission->name}}</label>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
                             <div class="card-action">
                                 <button class="btn btn-success" type="submit">Submit</button>
                                 <button class="btn btn-danger" onclick="history.back(); return false;">Cancel</button>

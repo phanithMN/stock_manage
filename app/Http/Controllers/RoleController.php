@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
@@ -14,31 +15,37 @@ class RoleController extends Controller
     }
 
     public function Insert() {
-        return view('page.roles.insert');
+        $permissions = Permission::orderBy('name', 'ASC')->get();
+        return view('page.roles.insert', ['permissions'=>$permissions]);
     }
 
     public function InsertData(Request $request) {
+
         $request->validate([
-            'name' => 'required|string|max:255',
-            // Other validations
-        ], [
-            'name.required' => 'Please enter name.',
-            // Custom messages for other fields
-        ]); 
+            'name' => 'required', 
+            'permission' => 'array',
+            'permission.*' => 'exists:permissions,name', 
+        ]);
+    
+        // Create the new role
+        $role = Role::create(['name' => $request->name]);
+        
+        // Attach selected permissions to the role
+        if ($request->has('permission')) {
+            $permissions = Permission::whereIn('name', $request->permission)->pluck('id');
+            $role->permissions()->attach($permissions);  // This will insert into the 'role_permission' table
+        }
 
-        $roles = new Role();
-        $roles->name = $request->input('name');
-        $roles->user_id = Auth::id();
-
-        $roles->save();
-        return redirect()->route('role')->with('message', 'Role Inserted Successfully');
+        return redirect()->route('role')->with('message', 'Role created and permissions assigned!');
     }
 
     // update 
     public function Update($id) {
         $roles = Role::find($id);
+        $permissions = Permission::orderBy('name', 'ASC')->get();
         return view('page.roles.edit', [
             'roles' => $roles, 
+            'permissions' => $permissions
         ]);
     }
 

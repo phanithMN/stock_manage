@@ -18,13 +18,6 @@ class PermissionController extends Controller
     }
 
     public function InsertData(Request $request) {
-        if (Auth::check()) {
-            $userId = Auth::id();
-            dd($userId);
-        } else {
-            // User is not authenticated
-            dd( 'User not logged in');
-        }
         $request->validate([
             'name' => 'required|string|max:255',
             // Other validations

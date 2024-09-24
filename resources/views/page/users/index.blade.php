@@ -63,7 +63,7 @@
                             <td>{{$user->name}}</td>
                             <td>{{$user->username}}</td>
                             <td>{{$user->email}}</td>
-                            <td>{{$user->role}}</td>
+                            <td>{{$user->role_name}}</td>
                            
                             <td>
                               <div class="form-button-action">

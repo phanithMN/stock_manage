@@ -7,25 +7,25 @@
         <div class="page-header">
             <h3 class="fw-bold mb-3">@yield('title')</h3>
             <ul class="breadcrumbs mb-3">
-            <li class="nav-home">
-                <a href="#">
-                <i class="icon-home"></i>
-                </a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('role')}}">Role</a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">@yield('title')</a>
-            </li>
+                <li class="nav-home">
+                    <a href="#">
+                    <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('role')}}">Role</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">@yield('title')</a>
+                </li>
             </ul>
-            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -52,7 +52,25 @@
                                     <span class="text-danger ml-2">{{ $message }}</span>
                                 @enderror
                             </div>
-                            
+                            <div class="card-action section-role">
+                                <div class="card-title mt-3">Asign Permission</div>
+                                <div class="d-flex">
+                                    @if ($permissions->isNotEmpty())
+                                        @foreach ($permissions as $permission )
+                                            <div class="form-group d-flex">
+                                                <input 
+                                                id="permission-{{$permission->id}}" 
+                                                type="checkbox" 
+                                                class="mr-5 rounded"
+                                                name="permission[]"  
+                                                value="{{$permission->name}}"
+                                                > 
+                                                <label class="form-label" for="permission-{{$permission->id}}">{{$permission->name}}</label>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
                             <div class="card-action">
                                 <button class="btn btn-success" type="submit">Submit</button>
                                 <button class="btn btn-danger" onclick="history.back(); return false;">Cancel</button>

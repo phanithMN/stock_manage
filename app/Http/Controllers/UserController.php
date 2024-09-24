@@ -11,13 +11,17 @@ class UserController extends Controller
 {
     public function User(Request $request) {
 
-        $users = User::paginate(10);
+        $users = User::join('role', 'users.role', '=', 'role.id')
+        ->select('users.*', 'role.name as role_name')
+        ->paginate(10);
 
         return view('page.users.index', ['users'=>$users]);
     }
 
     public function Insert() {
-        return view('page.users.insert');
+        $roles = Role::orderBy('name', 'ASC')->get();
+
+        return view('page.users.insert', ['roles'=>$roles]);
     }
 
     public function InsertData(Request $request) {
@@ -27,6 +31,7 @@ class UserController extends Controller
         $user->username = $request->input("username");
         $user->email = $request->input("email");
         $user->password = Hash::make($request->input("password"));
+        $user->role = $request->input('role_id');
         if($request->hasFile('image'))
         {
             $file = $request->file('image');
@@ -36,6 +41,8 @@ class UserController extends Controller
             $user->image = $filename;
         }
         $user->save();
+
+        
 
         return redirect()->route('user')->with('message', 'User Inserted Successfully');
     }
@@ -58,6 +65,7 @@ class UserController extends Controller
         $user->name = $request->input("name");
         $user->username = $request->input("username");
         $user->email = $request->input("email");
+        $user->role = $request->input('role_id');
         if($request->hasFile('image'))
         {
             $destination = 'uploads/users'. $user->image;

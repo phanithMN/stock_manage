@@ -50,9 +50,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Include Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- Include Bootstrap CSS and JS -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> -->
   </head>
   <body>
 
@@ -304,6 +301,18 @@
     @if (Session::has('message'))
         <script>
             swal("Message", "{{ Session::get('message')}}", 'success', {
+                buttons: true,
+                buttons: "OK",
+                timer: 2500,
+                dangerMode: true,
+            });
+        </script>
+    @endif
+    <!-- wirning message  -->
+      <!-- message success  -->
+    @if (Session::has('error'))
+        <script>
+            swal("Warning", "{{ Session::get('error')}}", 'warning', {
                 buttons: true,
                 buttons: "OK",
                 timer: 2500,

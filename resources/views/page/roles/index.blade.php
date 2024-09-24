@@ -46,7 +46,6 @@
                         <tr role="row">
                           <th class="w-1">#</th>
                           <th>Name</th>
-                          <th>User ID</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -55,8 +54,6 @@
                           <tr role="row" class="odd">
                             <td>{{$role->id}}</td>
                             <td>{{$role->name}}</td>
-                            <td>{{$role->user_id}}</td>
-                           
                             <td>
                               <div class="form-button-action">
                                 <a  href="{{ route('update-role', $role->id) }} type="button" title="Edit Item" class="btn btn-link btn-primary btn-lg">

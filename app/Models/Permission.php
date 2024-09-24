@@ -11,4 +11,9 @@ class Permission extends Model
     public $primaryKey = 'id';
     public $incrementing = true;
     public $timestamp = false;
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_permissions');
+    }
 }

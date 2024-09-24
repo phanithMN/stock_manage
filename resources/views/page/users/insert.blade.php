@@ -117,14 +117,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-action section-permission">
-                                <div class="form-group d-flex">
-                                    <label class="form-label" for="">Test</label>
-                                    <input 
-                                    id="" 
-                                    type="checkbox" 
-                                    name=""  
-                                    >
+                            <div class="card-action section-role">
+                                <div class="card-title mt-3">Asign Role</div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label for="role_id">Role <span class="text-danger">*</span></label>
+                                            <select class="form-select" id="role_id" name="role_id" required>
+                                                <option value="">Select Roles</option>
+                                                @if ($roles->isNotEmpty())
+                                                @foreach($roles as $role)
+                                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                                @endforeach
+                                            @endif
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
