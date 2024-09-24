@@ -18,6 +18,13 @@ class PermissionController extends Controller
     }
 
     public function InsertData(Request $request) {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            dd($userId);
+        } else {
+            // User is not authenticated
+            dd( 'User not logged in');
+        }
         $request->validate([
             'name' => 'required|string|max:255',
             // Other validations
@@ -32,7 +39,7 @@ class PermissionController extends Controller
        
 
         $permission->save();
-        return redirect()->route('permission')->with('message', 'Product Inserted Successfully');
+        return redirect()->route('permission')->with('message', 'Permission Inserted Successfully');
     }
 
     // update 
@@ -58,7 +65,7 @@ class PermissionController extends Controller
 
         $permission->update();
         
-        return redirect()->route('permission')->with('message','Product Updated Successfully');
+        return redirect()->route('permission')->with('message','Permission Updated Successfully');
     }
 
     // delete 
