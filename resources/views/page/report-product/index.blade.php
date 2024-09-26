@@ -106,19 +106,19 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->category_name }}</td>
                                 <td>{{ $item->created_at->format('Y-m-d') }}</td>
-                                <td>{{number_format($item->cost_price, 2)}}៛</td>
-                                <td>{{number_format($item->price, 2)}}៛</td>
+                                <td>{{number_format($item->cost_price)}}៛</td>
+                                <td>{{number_format($item->price)}}៛</td>
                                 <td>{{$item->quantity}}</td>
-                                <td>{{number_format($item->quantity * $item->price, 2)}}៛</td>
+                                <td>{{number_format($item->quantity * $item->price)}}៛</td>
                             </tr>
                           @endforeach
                         @endif
                         <tr role="row" class="odd bg-color-total">
                           <td colspan="3" class="text-center">Sub Total</td>
-                          <td>{{number_format($report_product->sum('cost_price'), 2)}}៛</td>
-                          <td>{{number_format($report_product->sum('price'), 2)}}៛</td>
+                          <td>{{number_format($report_product->sum('cost_price'))}}៛</td>
+                          <td>{{number_format($report_product->sum('price'))}}៛</td>
                           <td>{{$report_product->sum('quantity')}}</td>
-                          <td>{{number_format($report_product->sum('quantity') * $report_product->sum('price'), 2)}}៛</td>
+                          <td>{{number_format($report_product->sum('quantity') * $report_product->sum('price'))}}៛</td>
                         </tr>
                       </tbody>
                       <tfoot>
