@@ -85,6 +85,7 @@
                     <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                       <thead>
                         <tr role="row">
+                          <th>#</th>
                           <th>Name</th>
                           <th>Action</th>
                         </tr>
@@ -92,8 +93,8 @@
                       <tbody>
                         @foreach ($categories as $category)
                           <tr role="row" class="odd">
+                            <td>{{$category->id}}</td>
                             <td>{{$category->name}}</td>
-                           
                             <td>
                               <div class="form-button-action">
                                 <a  href="{{ route('update-category', $category->id) }} type="button" title="Edit Item" class="btn btn-link btn-primary btn-lg">

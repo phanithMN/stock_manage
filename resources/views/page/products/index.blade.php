@@ -101,7 +101,6 @@
                           <th>Cost Price</th>
                           <th>Price</th>
                           <th>Category</th>
-                          <th>Unit</th>
                           <th>Description</th>
                           <th>Created At</th>
                           <th class="w-1">Action</th>
@@ -115,11 +114,11 @@
                               <img src="{{ asset('uploads/products/' . $product->image) }}" alt="banner" style="width: 40px;height: auto;">
                             </td>
                             <td>{{$product->name}}</td>
-                            <td>{{$product->quantity}}</td>
-                            <td>{{$product->cost_price}}៛</td>
-                            <td>{{$product->price}}៛</td>
+                            <td>{{$product->quantity}} <span>{{$product->uom_unit}}</span></td>
+                            <td>{{number_format($product->cost_price)}}៛</td>
+                            <td>{{number_format($product->price)}}៛</td>
                             <td>{{$product->category_name}}</td>
-                            <td>{{$product->uom_unit}}</td>
+                            <!-- <td>{{$product->uom_unit}}</td> -->
                             <td>{{$product->description}}</td>
                             <td>{{\Carbon\Carbon::parse($product->created_at)->format('Y-m-d')}}</td>
                             <td>

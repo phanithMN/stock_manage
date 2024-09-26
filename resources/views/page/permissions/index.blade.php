@@ -44,16 +44,16 @@
                     <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                       <thead>
                         <tr role="row">
+                          <th>#</th>
                           <th>Name</th>
-                          <th>User ID</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach ($permissions as $permission)
                           <tr role="row" class="odd">
+                            <td>{{$permission->id}}</td>
                             <td>{{$permission->name}}</td>
-                            <td>{{$permission->user_id}}</td>
                            
                             <td>
                               <div class="form-button-action">

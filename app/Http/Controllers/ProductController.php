@@ -133,6 +133,16 @@ class ProductController extends Controller
 
     // delete 
     public function Delete(Request $request, $id){
+        $permissions = Permission::join('role_permissions', 'role_permissions.permission_id', '=', 'permissions.id')
+        ->select('permissions.name')
+        ->where('role_permissions.role_id', Auth::user()->role)
+        ->where('permissions.name', 'Delete Product')
+        ->get();
+
+        if(count($permissions) == 0) {
+            return redirect()->route('product')->with('error', 'You have no permission');
+        }
+        
         try {
             Product::destroy($request->id);
             return redirect()->route('product')->with('message','Delete Successfully');

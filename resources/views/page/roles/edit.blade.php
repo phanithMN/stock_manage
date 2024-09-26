@@ -33,7 +33,7 @@
                         <div class="card-title">@yield('title')</div>
                     </div>
                     <div class="card-body">
-                        <form method="post" class="form-group" action="{{ route('edit-data-role', $roles->id)}}" enctype="multipart/form-data">
+                        <form method="post" class="form-group" action="{{ route('edit-data-role', $role->id)}}" enctype="multipart/form-data">
                             @csrf  
                             @method('PUT')
                             <div class="row">
@@ -46,7 +46,7 @@
                                         id="Name"
                                         name="name"
                                         placeholder="Enter Name"
-                                        value="{{$roles->name}}"
+                                        value="{{$role->name}}"
                                         />
                                     </div>
                                     @error('name')
@@ -61,13 +61,14 @@
                                         @foreach ($permissions as $permission )
                                             <div class="form-group d-flex">
                                                 <input 
-                                                id="role-{{$permission->id}}" 
+                                                id="permission-{{$permission->id}}" 
                                                 type="checkbox" 
                                                 class="mr-5 rounded"
-                                                name="role[]"  
-                                                value="{{$permission->name}}"
+                                                name="permissions[]"  
+                                                value="{{$permission->id}}"
+                                                {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }}
                                                 > 
-                                                <label class="form-label" for="role-{{$permission->id}}">{{$permission->name}}</label>
+                                                <label class="form-label" for="permission-{{$permission->id}}">{{$permission->name}}</label>
                                             </div>
                                         @endforeach
                                     @endif

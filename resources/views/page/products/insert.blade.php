@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="cost_price">Cost Price <span class="text-danger">*</span></label>
+                                        <label for="cost_price">Cost Price(៛) <span class="text-danger">*</span></label>
                                         <input
                                         type="number"
                                         class="form-control"
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="price">Price <span class="text-danger">*</span></label>
+                                        <label for="price">Price(៛) <span class="text-danger">*</span></label>
                                         <input
                                         type="number"
                                         class="form-control"

@@ -44,6 +44,7 @@
                     <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                       <thead>
                         <tr role="row">
+                          <th>#</th>
                           <th>Unit</th>
                           <th>Action</th>
                         </tr>
@@ -51,6 +52,7 @@
                       <tbody>
                         @foreach ($unit_of_measures as $unit_of_measure)
                           <tr role="row" class="odd">
+                            <td>{{$unit_of_measure->id}}</td>
                             <td>{{$unit_of_measure->unit}}</td>
                             <td>
                               <div class="form-button-action">

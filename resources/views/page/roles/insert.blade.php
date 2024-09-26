@@ -63,7 +63,7 @@
                                                 type="checkbox" 
                                                 class="mr-5 rounded"
                                                 name="permission[]"  
-                                                value="{{$permission->name}}"
+                                                value="{{$permission->id}}"
                                                 > 
                                                 <label class="form-label" for="permission-{{$permission->id}}">{{$permission->name}}</label>
                                             </div>

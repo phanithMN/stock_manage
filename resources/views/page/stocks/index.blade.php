@@ -125,9 +125,9 @@
                             <td>{{$stock->user_id}}</td>
                             <td>{{$stock->product_name}}</td>
                             <td><span class="{{$stock->status  == "In" ? "color-in" : "color-out" }} status">{{$stock->status }}</span></td>
-                            <td>{{number_format($stock->price, 2)}}៛</td>
+                            <td>{{number_format($stock->price)}}៛</td>
                             <td>{{$stock->quantity}}</td>
-                            <td>{{number_format($stock->amount, 2)}}៛</td>
+                            <td>{{number_format($stock->amount)}}៛</td>
                             <td>{{\Carbon\Carbon::parse($stock->date)->format('Y-m-d')}}</td>
                             <td>
                               <div class="form-button-action">
