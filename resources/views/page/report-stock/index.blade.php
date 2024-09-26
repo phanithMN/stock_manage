@@ -121,7 +121,7 @@
                             <tr role="row" class="odd">
                               <td>{{ $item->reference_no }}</td>
                               <td>{{ $item->product_name }}</td>
-                              <td><span class="{{ $item->status == 'Income' ? 'color-income' : 'color-return' }} status">{{ $item->status }}</span></td>
+                              <td><span class="{{$item->status  == "In" ? "color-in" : "color-out" }} status">{{$item->status }}</span></td>
                               <td>{{ $item->created_at->format('Y-m-d') }}</td>
                               <td>{{number_format($item->price)}}៛</td>
                               <td>{{$item->quantity}}</td>
