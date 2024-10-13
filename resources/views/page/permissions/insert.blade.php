@@ -52,6 +52,18 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="permission_key">Select Key <span class="text-danger">*</span></label>
+                                    <select class="form-select form-control" id="permission_key" name="permission_key">
+                                        <option value="">Chosse Key</option>
+                                        @foreach($permission_keys as $permission_key)
+                                        <option value="{{$permission_key}}">{{$permission_key}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             
                             <div class="card-action">
                                 <button class="btn btn-success" type="submit">Submit</button>
