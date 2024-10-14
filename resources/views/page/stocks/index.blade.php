@@ -131,14 +131,14 @@
                             <td>{{\Carbon\Carbon::parse($stock->date)->format('Y-m-d')}}</td>
                             <td>
                               <div class="form-button-action">
-                                <a href="javascript:voide(0)"
+                                <!-- <a href="javascript:voide(0)"
                                 type="button" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#detailModal" 
                                 data-id="{{ $stock->id }}"
                                 title="Quick View" class="btn btn-link btn-primary btn-lg mr-5">
                                   <i class="fas fa-eye"></i>
-                                </a>
+                                </a> -->
                                 <a  href="{{ route('update-stock', $stock->id) }}" type="button" title="Edit Item" class=" btn btn-link btn-primary btn-lg">
                                   <i class="fa fa-edit"></i>
                                 </a>
