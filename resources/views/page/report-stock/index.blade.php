@@ -132,7 +132,7 @@
                           @endforeach
                         @endif
                         <tr role="row" class="odd bg-color-total">
-                          <td colspan="4" class="text-center">Sub Total</td>
+                          <td colspan="5" class="text-center">Sub Total</td>
                           <td>{{number_format($report_stocks->sum('price'))}}៛</td>
                           <td>{{$report_stocks->sum('quantity')}}</td>
                           <td>{{number_format($report_stocks->sum('quantity') * $report_stocks->sum('price'))}}៛</td>
