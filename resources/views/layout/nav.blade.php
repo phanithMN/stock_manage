@@ -96,12 +96,12 @@
                 </span>
                 <h4 class="text-section">Setting</h4>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="{{route('status')}}">
                     <i class="fas fa-chart-line"></i>
                     <p>Status</p>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a href="{{route('user')}}">
                     <i class="fas fa-user"></i>

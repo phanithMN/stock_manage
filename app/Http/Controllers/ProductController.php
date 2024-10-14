@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permission;
+use App\Models\PermissionKey;
 use App\Models\Status;
 use App\Models\UnitOfMeasure;
 use Illuminate\Http\Request;
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     public function Product(Request $request) {
+        $permission_keys = PermissionKey::$permission_key;
+        $permissions = Permission::join('role_permissions', 'role_permissions.permission_id', '=', 'permissions.id')
+        ->select('permissions.name')
+        ->where('role_permissions.role_id', Auth::user()->role)
+        ->where('permissions.name', 'View Product')
+        ->get();
+        if(count($permissions) == 0) {
+            return redirect()->route('product')->with('error', 'You have no permission');
+        }
+
         $categories = Category::all();
         $search_value = $request->query("search");
         $rowLength = $request->query('row_length', 10);
