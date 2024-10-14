@@ -44,13 +44,15 @@
                     <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                       <thead>
                         <tr role="row">
+                          <th>#</th>
                           <th>Name</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($status as $item)
+                        @foreach ($status as $key => $item)
                           <tr role="row" class="odd">
+                            <td>{{$key}}</td>
                             <td>{{$item->name}}</td>
                             <td>
                               <div class="form-button-action">

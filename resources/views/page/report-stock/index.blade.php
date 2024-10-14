@@ -104,6 +104,7 @@
                     <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                       <thead>
                         <tr role="row">
+                          <th>#</th>
                           <th>Reference No</th>
                           <th>Name</th>
                           <th>Status</th>
@@ -117,8 +118,9 @@
                         @if ($report_stocks->isEmpty())
                             <td colspan="8" class="none-report">No Stock Response</td>
                         @else
-                          @foreach ($report_stocks as $item)
+                          @foreach ($report_stocks as $key => $item)
                             <tr role="row" class="odd">
+                              <td>{{ $key }}</td>
                               <td>{{ $item->reference_no }}</td>
                               <td>{{ $item->product_name }}</td>
                               <td><span class="{{$item->status  == "In" ? "color-in" : "color-out" }} status">{{$item->status }}</span></td>

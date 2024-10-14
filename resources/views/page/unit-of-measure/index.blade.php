@@ -50,9 +50,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($unit_of_measures as $unit_of_measure)
+                        @foreach ($unit_of_measures as $key => $unit_of_measure)
                           <tr role="row" class="odd">
-                            <td>{{$unit_of_measure->id}}</td>
+                            <td>{{$key}}</td>
                             <td>{{$unit_of_measure->unit}}</td>
                             <td>
                               <div class="form-button-action">

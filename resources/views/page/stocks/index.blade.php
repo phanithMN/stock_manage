@@ -118,9 +118,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($stocks as $stock)
+                        @foreach ($stocks as $key => $stock)
                           <tr role="row" class="odd">
-                            <td>{{$stock->id}}</td>
+                            <td>{{$key}}</td>
                             <td>{{$stock->reference_no}}</td>
                             <td>{{$stock->user_id}}</td>
                             <td>{{$stock->product_name}}</td>

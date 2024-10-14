@@ -88,6 +88,7 @@
                     <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                       <thead>
                         <tr role="row">
+                          <th>#</th>
                           <th>Name</th>
                           <th>Category</th>
                           <th>Date</th>
@@ -101,8 +102,9 @@
                         @if ($report_product->isEmpty())
                             <td colspan="8" class="none-report">No Stock Response</td>
                         @else
-                          @foreach ($report_product as $item)
+                          @foreach ($report_product as $key => $item)
                             <tr role="row" class="odd">
+                                <td>{{ $key }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->category_name }}</td>
                                 <td>{{ $item->created_at->format('Y-m-d') }}</td>
@@ -114,7 +116,7 @@
                           @endforeach
                         @endif
                         <tr role="row" class="odd bg-color-total">
-                          <td colspan="3" class="text-center">Sub Total</td>
+                          <td colspan="4" class="text-center">Sub Total</td>
                           <td>{{number_format($report_product->sum('cost_price'))}}៛</td>
                           <td>{{number_format($report_product->sum('price'))}}៛</td>
                           <td>{{$report_product->sum('quantity')}}</td>

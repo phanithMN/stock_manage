@@ -50,9 +50,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($roles as $role)
+                        @foreach ($roles as $key => $role)
                           <tr role="row" class="odd">
-                            <td>{{$role->id}}</td>
+                            <td>{{$key}}</td>
                             <td>{{$role->name}}</td>
                             <td>
                               <div class="form-button-action">

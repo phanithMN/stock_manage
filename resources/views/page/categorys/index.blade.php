@@ -91,9 +91,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($categories as $key => $category)
                           <tr role="row" class="odd">
-                            <td>{{$category->id}}</td>
+                            <td>{{$key}}</td>
                             <td>{{$category->name}}</td>
                             <td>
                               <div class="form-button-action">

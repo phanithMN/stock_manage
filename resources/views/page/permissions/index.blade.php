@@ -50,9 +50,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($permissions as $permission)
+                        @foreach ($permissions as $key => $permission)
                           <tr role="row" class="odd">
-                            <td>{{$permission->id}}</td>
+                            <td>{{$key}}</td>
                             <td>{{$permission->name}}</td>
                            
                             <td>

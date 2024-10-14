@@ -54,9 +54,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($users as $key => $user)
                           <tr role="row" class="odd">
-                            <td>{{$user->id}}</td>
+                            <td>{{$key}}</td>
                             <td style="text-align: center">
                               <img src="{{ asset('uploads/users/' . $user->image) }}" alt="banner" style="width: 50px;height: auto;">
                             </td>
