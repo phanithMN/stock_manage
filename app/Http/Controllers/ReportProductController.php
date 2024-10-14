@@ -86,7 +86,7 @@ class ReportProductController extends Controller
                 $data = [
                     isset($product->id) ? $product->id : '',
                     isset($product->name) ? $product->name : '',
-                    isset($product->quantity) ? number_format($product->quantity).$product->uom->unit : '',
+                    isset($product->quantity) ? number_format($product->quantity).' '.$product->uom->unit : '',
                     isset($product->price) ? $product->price.'៛' : '',
                     isset($product->category->name) ? $product->category->name : '', // Access category name
                     isset($product->status->name) ? $product->status->name : '',     // Access status name
