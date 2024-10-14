@@ -56,18 +56,21 @@ class ReportStockController extends Controller
     public function ExportCSV()
     {
         $filename = 'stock.csv';
-    
+
         $headers = [
-            'Content-Type' => 'text/csv',
+            'Content-Type' => 'text/csv; charset=UTF-8',
             'Content-Disposition' => "attachment; filename=\"$filename\"",
             'Pragma' => 'no-cache',
             'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
             'Expires' => '0',
         ];
-    
+
         return response()->stream(function () {
             $handle = fopen('php://output', 'w');
-    
+
+            // Add BOM (Byte Order Mark) to support special characters in Excel
+            fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF));
+
             // Add CSV headers
             fputcsv($handle, [
                 'ID',
@@ -78,30 +81,31 @@ class ReportStockController extends Controller
                 'Quantity',
                 'Total',
             ]);
-    
+
+            // Fetch stock data with relations in chunks to avoid memory overload
             Stock::with(['category', 'status', 'product'])->chunk(25, function ($stocks) use ($handle) {
                 foreach ($stocks as $stock) {
-                    // Extract data from each stock along with the joined product, category, and status.
+                    // Extract data from each stock along with product, category, and status
                     $data = [
                         isset($stock->id) ? $stock->id : '',
                         isset($stock->created_at) ? $stock->created_at->format('Y-m-d') : '',
-                        isset($stock->product->name) ? $stock->product->name : '',  // Product name
-                        isset($stock->status->name) ? $stock->status->name : '',    
-                        isset($stock->price) ? '$'.number_format($stock->price, 2) : '0',  
+                        isset($stock->product->name) ? $stock->product->name : '', 
+                        isset($stock->status) ? $stock->status : '',    
+                        isset($stock->price) ? number_format($stock->price, 2).'៛' : '0',  
                         isset($stock->quantity) ? $stock->quantity : '0',  
-                        isset($stock->quantity) ? '$'.number_format($stock->quantity * $stock->price, 2) : '0', 
+                        isset($stock->quantity) ? number_format($stock->quantity * $stock->price, 2).'៛' : '0', 
                     ];
-            
-                    // Write data to a CSV file.
+
+                    // Write data to the CSV file, ensuring UTF-8 support
                     fputcsv($handle, $data);
                 }
             });
-            
-    
+
             // Close CSV file handle
             fclose($handle);
         }, 200, $headers);
     }
+
 
     public function ImportCSV (Request $request)
     {
