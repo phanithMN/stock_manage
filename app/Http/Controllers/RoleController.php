@@ -23,9 +23,8 @@ class RoleController extends Controller
 
     public function InsertData(Request $request) {
         $request->validate([
-            'name' => 'required', 
-            'permission' => 'array',
-            'permission.*' => 'exists:permissions,name', 
+            'name' => 'required|string|max:255',
+            'permission' => 'array', 
         ]);
     
         // Create the new role
