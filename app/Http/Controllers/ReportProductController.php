@@ -76,7 +76,6 @@ class ReportProductController extends Controller
             'Price',
             'Category',
             'Status',
-            'UOM',
             'Created At',
         ]);
 
@@ -87,11 +86,10 @@ class ReportProductController extends Controller
                 $data = [
                     isset($product->id) ? $product->id : '',
                     isset($product->name) ? $product->name : '',
-                    isset($product->quantity) ? $product->quantity : '',
+                    isset($product->quantity) ? number_format($product->quantity).$product->uom->unit : '',
                     isset($product->price) ? $product->price.'៛' : '',
                     isset($product->category->name) ? $product->category->name : '', // Access category name
                     isset($product->status->name) ? $product->status->name : '',     // Access status name
-                    isset($product->uom->unit) ? $product->uom->unit : '',           // Access UOM
                     isset($product->created_at) ? $product->created_at->format('Y-m-d') : '',
                 ];
 
