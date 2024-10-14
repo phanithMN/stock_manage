@@ -114,7 +114,7 @@
                               <img src="{{ asset('uploads/products/' . $product->image) }}" alt="banner" style="width: 40px;height: auto;">
                             </td>
                             <td>{{$product->name}}</td>
-                            <td>{{$product->quantity}} <span>{{$product->uom_unit}}</span></td>
+                            <td>{{number_format($product->quantity)}} <span>{{$product->uom_unit}}</span></td>
                             <td>{{number_format($product->cost_price)}}៛</td>
                             <td>{{number_format($product->price)}}៛</td>
                             <td>{{$product->category_name}}</td>

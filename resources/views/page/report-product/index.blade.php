@@ -108,7 +108,7 @@
                                 <td>{{ $item->created_at->format('Y-m-d') }}</td>
                                 <td>{{number_format($item->cost_price)}}៛</td>
                                 <td>{{number_format($item->price)}}៛</td>
-                                <td>{{$item->quantity}}</td>
+                                <td>{{number_format($item->quantity)}}</td>
                                 <td>{{number_format($item->quantity * $item->price)}}៛</td>
                             </tr>
                           @endforeach

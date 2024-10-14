@@ -124,7 +124,7 @@
                               <td><span class="{{$item->status  == "In" ? "color-in" : "color-out" }} status">{{$item->status }}</span></td>
                               <td>{{ $item->created_at->format('Y-m-d') }}</td>
                               <td>{{number_format($item->price)}}៛</td>
-                              <td>{{$item->quantity}}</td>
+                              <td>{{number_format($item->quantity)}}</td>
                               <td>{{number_format($item->quantity * $item->price)}} ៛</td>
                             </tr>
                           @endforeach
