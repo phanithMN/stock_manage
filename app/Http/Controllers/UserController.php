@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function User(Request $request) {
 
-        $users = User::join('role', 'users.role', '=', 'role.id')
+        $users = User::leftJoin('role', 'users.role', '=', 'role.id')
         ->select('users.*', 'role.name as role_name')
         ->paginate(10);
 
