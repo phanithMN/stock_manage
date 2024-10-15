@@ -109,7 +109,7 @@
                                                 <option value="">Select Roles</option>
                                                 @if ($roles->isNotEmpty())
                                                 @foreach($roles as $role)
-                                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                                <option value="{{$role->id}}" {{$role->id == $user->role ? 'selected' : '' }}>{{$role->name}}</option>
                                                 @endforeach
                                             @endif
                                             </select>
