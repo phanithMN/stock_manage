@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     public function Product(Request $request) {
-        $permissions = Permission::join('role_permissions', 'role_permissions.permission_id', '=', 'permissions.id')
-        ->select('permissions.name')
-        ->where('role_permissions.role_id', Auth::user()->role)
-        ->where('permissions.name', 'Add View Product')
-        ->get();
-        if(count($permissions) == 0) {
-            return redirect()->back()->with('error', 'You have no permission');
-        }
+        // $permissions = Permission::join('role_permissions', 'role_permissions.permission_id', '=', 'permissions.id')
+        // ->select('permissions.name')
+        // ->where('role_permissions.role_id', Auth::user()->role)
+        // ->where('permissions.name', 'Add View Product')
+        // ->get();
+        // if(count($permissions) == 0) {
+        //     return redirect()->back()->with('error', 'You have no permission');
+        // }
 
         $categories = Category::all();
         $search_value = $request->query("search");
