@@ -12,15 +12,11 @@ class ReportProductController extends Controller
 {
     public function ReportProduct(Request $request) {
         $currentDate = Carbon::now()->toDateString(); 
-        $rowLength = $request->query('row_length', 10);
+        $rowLength = $request->query('add_row_length', 10);
         $search_value = $request->query("search");
         $date = $request->query('date', $currentDate);
         $categories = Category::all();
         $status = Status::all();
-
-        $rowLength = $request->query('row_length', 10);
-       
-
 
         if ($request->has('start_date') && $request->has('end_date')) {
             $report_product = Product::whereBetween('products.created_at', [
