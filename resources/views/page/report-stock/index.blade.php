@@ -32,73 +32,56 @@
           <div class="card-body">
             <div class="table-responsive">
               <div id="add-row_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 p-0">
-                <div class="row">
-                  <div class="col-sm-12 col-md-2">
-                    <div class="dataTables_length" id="add-row_length">
-                      <label>
-                        Show 
-                        <select id="add_row_length" name="add_row_length" aria-controls="add-row" class="form-control form-control-sm">
-                          <option value="10" {{ request('row_length') == 10 ? 'selected' : '' }}>10</option>
-                          <option value="25" {{ request('row_length') == 25 ? 'selected' : '' }}>25</option>
-                          <option value="50" {{ request('row_length') == 50 ? 'selected' : '' }}>50</option>
-                          <option value="100" {{ request('row_length') == 100 ? 'selected' : '' }}>100</option>
-                        </select> entries 
-                      </label>
+                <form action="{{ route('report-stock') }}" method="GET" class="d-flex" id="filterForm">
+                  <div class="row" style="width: 100%;">
+                    <div class="col-sm-12 col-md-2">
+                      <div class="dataTables_length" id="add-row_length">
+                        <label>
+                          Show 
+                          <select id="add_row_length" name="add_row_length" aria-controls="add-row" class="form-control form-control-sm" onchange="document.getElementById('filterForm').submit();">
+                            <option value="10" {{ request('add_row_length') == 10 ? 'selected' : '' }}>10</option>
+                            <option value="25" {{ request('add_row_length') == 25 ? 'selected' : '' }}>25</option>
+                            <option value="50" {{ request('add_row_length') == 50 ? 'selected' : '' }}>50</option>
+                            <option value="100" {{ request('add_row_length') == 100 ? 'selected' : '' }}>100</option>
+                          </select> entries 
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-10 d-flex fill-right">
+                      <div id="add-row_filter" class="dataTables_filter d-flex">
+                          <div class="input-filter d-flex">
+                              <label for="start_date">Start Date:</label>
+                              <input type="date" id="start_date" name="start_date"
+                              class="form-control form-control-sm"
+                              value="{{ request('start_date') }}"
+                              onchange="document.getElementById('filterForm').submit();">
+                          </div>
+                          <div class="input-filter d-flex">
+                              <label for="end_date">End Date:</label>
+                              <input type="date" id="end_date" name="end_date"
+                              class="form-control form-control-sm"
+                              value="{{ request('end_date') }}"
+                              onchange="document.getElementById('filterForm').submit();">
+                          </div>
+                          <div class="search-filter">
+                            <input 
+                            type="search" 
+                            name="search" 
+                            class="form-control form-control-sm" 
+                            placeholder="Search..." 
+                            aria-label="Search..." 
+                            value="{{ request('search')}}"
+                            onchange="document.getElementById('filterForm').submit();" 
+                            />
+                          </div>
+                          <div class="button-export">
+                            <a href="{{route('export-stock')}}" class="btn btn-primary d-flex"><i class="fas fa-file-export"></i>Export</a>
+                          </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-sm-12 col-md-10 d-flex fill-right">
-                    <!-- <div class="form-controll-fillter">
-                      <select class="form-select form-select-sm" id="category"  name="category">
-                        <option value="">Chosse Category</option>
-                        @foreach ($categories as $category )
-                        <option value="{{$category->name}}" {{ request('category') == $category->name ? 'selected' : '' }}>{{$category->name}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="form-controll-fillter">
-                      <select class="form-select form-select-sm" id="status_name"  name="status_name">
-                        <option value="">Chosse Status</option>
-                        @foreach ($status as $status_item )
-                        <option value="{{$status_item->name}}" {{ request('status_name') == $status_item->name ? 'selected' : '' }}>{{$status_item->name}}</option>
-                        @endforeach
-                      </select>
-                    </div> -->
-                    <div id="add-row_filter" class="dataTables_filter">
-                      <form action="{{ route('report-stock') }}" method="GET" class="d-flex" id="filterForm">
-                        <div class="input-filter d-flex">
-                            <label for="start_date">Start Date:</label>
-                            <input type="date" id="start_date" name="start_date"
-                            class="form-control form-control-sm"
-                            value="{{ request('start_date') }}"
-                            onchange="document.getElementById('filterForm').submit();">
-                        </div>
+                </form>
 
-                        <div class="input-filter d-flex">
-                            <label for="end_date">End Date:</label>
-                            <input type="date" id="end_date" name="end_date"
-                            class="form-control form-control-sm"
-                            value="{{ request('end_date') }}"
-                            onchange="document.getElementById('filterForm').submit();">
-                        </div>
-                        <div class="search-filter">
-                          <input 
-                          type="search" 
-                          name="search" 
-                          class="form-control form-control-sm" 
-                          placeholder="Search..." 
-                          aria-label="Search..." 
-                          value="{{ request('search')}}"
-                          onchange="document.getElementById('filterForm').submit();" 
-                          />
-                        </div>
-                    </form>
-                    </div>
-                    <div class="button-export">
-                      <a href="{{ route('export-stock') }}" class="btn btn-primary d-flex"><i class="fas fa-file-export"></i>Export</a>
-                    </div>
-                  </div>
-                  
-                </div>
                 <div class="row m-0">
                   <div class="col-sm-12 p-0">
                     <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
@@ -133,9 +116,29 @@
                         @endif
                         <tr role="row" class="odd bg-color-total">
                           <td colspan="5" class="text-center">Sub Total</td>
-                          <td>{{number_format($report_stocks->sum('price'))}}៛</td>
-                          <td>{{$report_stocks->sum('quantity')}}</td>
-                          <td>{{number_format($report_stocks->sum('quantity') * $report_stocks->sum('price'))}}៛</td>
+                          <td>
+                            @php
+                             $stockInPrice = $report_stocks->where('status', 'In')->sum('price');
+                             $stockOutPrice = $report_stocks->where('status', 'Out')->sum('price');
+                             $stockSpoiledPrice = $report_stocks->where('status', 'Spoiled')->sum('price');
+                             $stockReturnPrice = $report_stocks->where('status', 'Return')->sum('price');
+                             $totalPrice = ($stockReturnPrice - $stockOutPrice) + ($stockInPrice -  $stockSpoiledPrice)
+                            @endphp
+                            {{abs($totalPrice)}}៛
+                          </td>
+                          <td>
+                            @php
+                              $stockInSum = $report_stocks->where('status', 'In')->sum('quantity');
+                              $stockOutSum = $report_stocks->where('status', 'Out')->sum('quantity');
+                              $stockSpoiledSum = $report_stocks->where('status', 'Spoiled')->sum('quantity');
+                              $stockReturnSum = $report_stocks->where('status', 'Return')->sum('quantity');
+                              $totalStock = ($stockInSum - $stockOutSum) +  ($stockSpoiledSum - $stockReturnSum);
+                            @endphp
+                            {{abs($totalStock)}}
+                          </td>
+                          <td>
+                          {{abs($totalStock * $totalPrice)}}៛
+                          </td>
                         </tr>
                       </tbody>
                       <tfoot>

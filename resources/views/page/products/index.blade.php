@@ -33,7 +33,7 @@
             <div class="d-flex align-items-center">
               <h4 class="card-title">@yield('title') Table</h4>
               <a href="{{route('insert-product')}}" class="btn btn-primary btn-round ms-auto">
-                <i class="fa fa-plus"></i> Add Row </a>
+                <i class="fa fa-plus"></i> Add New </a>
             </div>
           </div>
           <div class="card-body">

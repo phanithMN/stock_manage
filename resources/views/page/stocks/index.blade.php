@@ -122,7 +122,7 @@
                           <tr role="row" class="odd">
                             <td>{{$key}}</td>
                             <td>{{$stock->reference_no}}</td>
-                            <td>{{$stock->user_id}}</td>
+                            <td>{{$stock->user_name}}</td>
                             <td>{{$stock->product_name}}</td>
                             <td><span class="{{$stock->status  == "In" ? "color-in" : "color-out" }} status">{{$stock->status }}</span></td>
                             <td>{{number_format($stock->price)}}៛</td>

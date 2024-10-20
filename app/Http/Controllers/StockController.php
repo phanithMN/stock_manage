@@ -14,7 +14,8 @@ class StockController extends Controller
         $status = Status::all();
         $rowLength = $request->query('row_length', 10);
         $stocks = Stock::leftJoin('products', 'products.id', '=', 'stocks.product_id')
-        ->select('stocks.*', 'products.name as product_name')
+        ->leftJoin('users', 'users.id', '=', 'stocks.user_id')
+        ->select('stocks.*', 'products.name as product_name', 'users.name as user_name')
         ->where(function($query) use ($request) {
             $query->where('products.name', 'like', '%'.$request->query("search").'%')
                   ->orWhereNull('products.name');

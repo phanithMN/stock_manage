@@ -31,14 +31,18 @@ class ReportStockController extends Controller
                 $request->input('start_date'), 
                 $request->input('end_date')
             ])
-            ->where('products.name', 'like', '%'.$request->input('search').'%')
-            ->join('products', 'products.id', '=', 'stocks.product_id') 
+            ->where(function($query) use ($request) {
+                $query->where('products.name', 'like', '%'.$request->query("search").'%')->orWhereNull('products.name');
+            })
+            ->leftJoin('products', 'products.id', '=', 'stocks.product_id') 
             ->select('stocks.*', 'products.name as product_name')
             ->paginate($rowLength);
         } else {
-            $report_stocks = Stock::join('products', 'products.id', '=', 'stocks.product_id') 
+            $report_stocks = Stock::leftJoin('products', 'products.id', '=', 'stocks.product_id') 
             ->select('stocks.*', 'products.name as product_name')
-            ->where('products.name', 'like', '%'.$request->input('search').'%')
+            ->where(function($query) use ($request) {
+                $query->where('products.name', 'like', '%'.$request->query("search").'%')->orWhereNull('products.name');
+            })
             ->whereDate('stocks.created_at', Carbon::today()) 
             ->paginate($rowLength);
     
@@ -68,7 +72,6 @@ class ReportStockController extends Controller
         return response()->stream(function () {
             $handle = fopen('php://output', 'w');
 
-            // Add BOM (Byte Order Mark) to support special characters in Excel
             fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF));
 
             // Add CSV headers
@@ -82,10 +85,8 @@ class ReportStockController extends Controller
                 'Total',
             ]);
 
-            // Fetch stock data with relations in chunks to avoid memory overload
             Stock::with(['category', 'status', 'product'])->chunk(25, function ($stocks) use ($handle) {
                 foreach ($stocks as $stock) {
-                    // Extract data from each stock along with product, category, and status
                     $data = [
                         isset($stock->id) ? $stock->id : '',
                         isset($stock->created_at) ? $stock->created_at->format('Y-m-d') : '',
@@ -96,7 +97,6 @@ class ReportStockController extends Controller
                         isset($stock->quantity) ? number_format($stock->quantity * $stock->price, 2).'៛' : '0', 
                     ];
 
-                    // Write data to the CSV file, ensuring UTF-8 support
                     fputcsv($handle, $data);
                 }
             });
