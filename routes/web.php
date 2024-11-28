@@ -55,6 +55,14 @@ Route::get('/edit-stock/{id}', [App\Http\Controllers\StockController::class, 'Up
 Route::put('/edit-data-stock/{id}', [App\Http\Controllers\StockController::class, 'DataUpdate'])->name('edit-data-stock');
 Route::get('/delete-stock/{id}', [App\Http\Controllers\StockController::class, 'Delete'])->name('delete-stock');
 Route::get('/stock-detail/{id}', [App\Http\Controllers\StockController::class, 'show'])->name('stock-detail');
+// stock out
+Route::get('/stock-out', [App\Http\Controllers\StockOutController::class, 'StockOut'])->name('stock-out');
+Route::get('/insert-stock-out', [App\Http\Controllers\StockOutController::class, 'Insert'])->name('insert-stock-out');
+Route::post('/insert-data-stock-out', [App\Http\Controllers\StockOutController::class, 'InsertData'])->name('insert-data-stock-out');
+Route::get('/edit-stock-out/{id}', [App\Http\Controllers\StockOutController::class, 'Update'])->name('update-stock-out');
+Route::put('/edit-data-stock-out/{id}', [App\Http\Controllers\StockOutController::class, 'DataUpdate'])->name('edit-data-stock-out');
+Route::get('/delete-stock-out/{id}', [App\Http\Controllers\StockOutController::class, 'Delete'])->name('delete-stock-out');
+Route::get('/stock-detail-out/{id}', [App\Http\Controllers\StockOutController::class, 'show'])->name('stock-detail-out');
 // user
 Route::get('/user', [App\Http\Controllers\UserController::class, 'User'])->name('user');
 Route::get('/insert-user', [App\Http\Controllers\UserController::class, 'Insert'])->name('insert-user');
@@ -82,6 +90,9 @@ Route::get('/export-stock', [App\Http\Controllers\ReportStockController::class, 
 // report product 
 Route::get('/report-product', [App\Http\Controllers\ReportProductController::class, 'ReportProduct'])->name('report-product');
 Route::get('/export-product', [App\Http\Controllers\ReportProductController::class, 'ExportCSV'])->name('export-product');
+// report product 
+Route::get('/report-revenue', [App\Http\Controllers\ReportRevenueController::class, 'ReportRevenue'])->name('report-revenue');
+Route::get('/export-revenue', [App\Http\Controllers\ReportRevenueController::class, 'ExportCSV'])->name('export-revenue');
 //setting
 Route::get('/account-setting', [App\Http\Controllers\AccountSettingController::class, 'AccountSetting'])->name('account-setting');
 Route::post('/insert-data', [App\Http\Controllers\AccountSettingController::class, 'DataInsert'])->name('insert-data');

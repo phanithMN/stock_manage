@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title') {{'Update Product In Stock'}} @endsection
+@section('title') {{'Insert Product Out Stock'}} @endsection
 @section('content')
 
 <div class="container">
@@ -7,25 +7,25 @@
         <div class="page-header">
             <h3 class="fw-bold mb-3">@yield('title')</h3>
             <ul class="breadcrumbs mb-3">
-            <li class="nav-home">
-                <a href="#">
-                <i class="icon-home"></i>
-                </a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('role')}}">Role</a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">@yield('title')</a>
-            </li>
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('stock')}}">Stock</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">@yield('title')</a>
+                </li>
             </ul>
-            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -33,9 +33,8 @@
                         <div class="card-title">@yield('title')</div>
                     </div>
                     <div class="card-body">
-                        <form method="post" class="form-group" action="{{ route('edit-data-stock', $stock->id)}}" enctype="multipart/form-data">
-                            @csrf  
-                            @method('PUT')
+                        <form method="post" class="form-group" action="{{route('insert-data-stock-out')}}" enctype="multipart/form-data">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
@@ -43,7 +42,7 @@
                                         <select class="form-select form-control" id="product_id" name="product_id" required>
                                             <option value="">Chosse Product</option>
                                             @foreach($products as $item)
-                                            <option value="{{$item->id}}" {{$item->id == $stock->product_id ? 'selected' : '' }}>{{$item->name}}</option>
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -57,7 +56,6 @@
                                         id="reference_no"
                                         name="reference_no"
                                         placeholder="Enter Reference No"
-                                        value="{{$stock->reference_no}}"
                                         required
                                         />
                                     </div>
@@ -71,7 +69,6 @@
                                         id="price"
                                         name="price"
                                         placeholder="Enter Price"
-                                         value="{{$stock->price}}"
                                         required
                                         />
                                     </div>
@@ -85,7 +82,6 @@
                                         id="quantity"
                                         name="quantity"
                                         placeholder="Enter Quantity"
-                                         value="{{$stock->quantity}}"
                                         required
                                         />
                                     </div>
@@ -98,7 +94,6 @@
                                         class="form-control"
                                         id="date"
                                         name="date"
-                                        value="{{\Carbon\Carbon::parse($stock->date)->format('Y-m-d') }}"
                                         required
                                         />
                                     </div>

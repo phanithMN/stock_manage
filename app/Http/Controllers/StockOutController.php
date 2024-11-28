@@ -8,16 +8,16 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\Stock;
 
-class StockController extends Controller
+class StockOutController extends Controller
 {
-    public function Stock(Request $request) {
+    public function StockOut(Request $request) {
         $status = Status::all();
         $averagePrice = Stock::avg('price');
         $rowLength = $request->query('row_length', 10);
         $stocks = Stock::leftJoin('products', 'products.id', '=', 'stocks.product_id')
         ->leftJoin('users', 'users.id', '=', 'stocks.user_id')
         ->select('stocks.*', 'products.name as product_name', 'users.name as user_name')
-        ->where('stocks.status', '=', 'In')
+        ->where('stocks.status', '=', 'Out')
         ->where(function($query) use ($request) {
             $query->where('products.name', 'like', '%'.$request->query("search").'%')
                   ->orWhereNull('products.name');
@@ -32,7 +32,7 @@ class StockController extends Controller
         ->orderBy('stocks.id', 'asc')
         ->paginate($rowLength);
         
-        return view('page.stocks.index', [
+        return view('page.stocks-out.index', [
             'stocks'=>$stocks, 
             'status' => $status,
             'averagePrice'=>$averagePrice
@@ -41,7 +41,7 @@ class StockController extends Controller
 
     public function Insert() {
         $products = Product::all();
-        return view('page.stocks.insert', 
+        return view('page.stocks-out.insert', 
         [
             'products'=>$products,
         ]);
@@ -58,7 +58,7 @@ class StockController extends Controller
         $stock->product_id = $request->input('product_id');
         $stock->date = $request->input('date');
         $stock->sku = $sku;
-        $stock->status = "In";
+        $stock->status = 'Out';
         $stock->amount = $request->input('quantity') * $request->input('price');
 
         $stock->save();
@@ -69,7 +69,7 @@ class StockController extends Controller
             $product->save();
         }
 
-        return redirect()->route('stock')->with('message', 'Stock In Inserted Successfully');
+        return redirect()->route('stock-out')->with('message', 'Stock Out Inserted Successfully');
     }
 
     // update 
@@ -78,7 +78,7 @@ class StockController extends Controller
         $status = Status::all();
         $stock = Stock::find($id);
 
-        return view('page.stocks.edit', [
+        return view('page.stocks-out.edit', [
             'stock' => $stock, 
             'products'=>$products,
             'status'=>$status
@@ -95,7 +95,7 @@ class StockController extends Controller
         $stock->quantity = $request->input('quantity');
         $stock->price = $request->input('price');
         $stock->product_id = $request->input('product_id');
-        $stock->status = "In";
+        $stock->status = "Out";
         $stock->date = $request->input('date');
         $stock->amount = $request->input('quantity') * $request->input('price');
         $stock->update(); // Use save() instead of update()
@@ -118,14 +118,14 @@ class StockController extends Controller
             $product->update();
         }
     
-        return redirect()->route('stock')->with('message', 'Stock In Updated Successfully');
+        return redirect()->route('stock-out')->with('message', 'Stock Out Updated Successfully');
     }
 
     // delete 
     public function Delete(Request $request, $id){
         try {
             Stock::destroy($request->id);
-            return redirect()->route('stock')->with('message','Delete Successfully');
+            return redirect()->route('stock-out')->with('message','Delete Successfully');
         } catch(\Exception $e) {
             report($e);
         }

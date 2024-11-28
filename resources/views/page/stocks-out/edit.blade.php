@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title') {{'Update Product In Stock'}} @endsection
+@section('title') {{'Update Product Out Stock'}} @endsection
 @section('content')
 
 <div class="container">
@@ -33,7 +33,7 @@
                         <div class="card-title">@yield('title')</div>
                     </div>
                     <div class="card-body">
-                        <form method="post" class="form-group" action="{{ route('edit-data-stock', $stock->id)}}" enctype="multipart/form-data">
+                        <form method="post" class="form-group" action="{{ route('edit-data-stock-out', $stock->id)}}" enctype="multipart/form-data">
                             @csrf  
                             @method('PUT')
                             <div class="row">

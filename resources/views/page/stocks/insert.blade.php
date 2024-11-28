@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title') {{'Insert Product In/Out Stock'}} @endsection
+@section('title') {{'Insert Product In Stock'}} @endsection
 @section('content')
 
 <div class="container">
@@ -96,19 +96,6 @@
                                         name="date"
                                         required
                                         />
-                                    </div>
-                                </div>
-                               
-                                <div class="col-md-6 col-lg-6">
-                                    <div class="form-group">
-                                        <label for="status">Status <span class="text-danger">*</span></label>
-                                        <select class="form-select form-control" id="status" name="status" required>
-                                            <option value="">Chosse Status</option>
-                                            <option value="In">In</option>
-                                            <option value="Out">Out</option>
-                                            <option value="Spoiled">Spoiled</option>
-                                            <option value="Return">Return</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-6">

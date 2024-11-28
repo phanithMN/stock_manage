@@ -33,7 +33,7 @@ class RoleController extends Controller
         // Attach selected permissions to the role
         if ($request->has('permission')) {
             $permissions = Permission::whereIn('name', $request->permission)->pluck('id');
-            $role->permissions()->attach($permissions);  // This will insert into the 'role_permission' table
+            $role->permissions()->attach($permissions); 
         }
 
         return redirect()->route('role')->with('message', 'Role created and permissions assigned!');

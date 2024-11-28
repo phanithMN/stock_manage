@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title') {{'Stock In'}} @endsection
+@section('title') {{'Stock Out'}} @endsection
 @section('content')
 
 <div class="container">
@@ -32,7 +32,7 @@
           <div class="card-header"> 
             <div class="d-flex align-items-center justify-content-between">
               <h4 class="card-title">@yield('title') Table</h4>
-              <a href="{{route('insert-stock')}}" class="btn btn-primary btn-round ms-auto">
+              <a href="{{route('insert-stock-out')}}" class="btn btn-primary btn-round ms-auto">
                 <i class="fa fa-plus"></i> Add New 
               </a>
             </div>
@@ -113,7 +113,7 @@
                           <th>Price</th>
                           <th>Quantity</th>
                           <th>Amount</th>
-                          <th>AVG</th>
+                          <th>Avg</th>
                           <th>Date At</th>
                           <th class="w-1">Action</th>
                         </tr>
@@ -141,7 +141,7 @@
                                 title="Quick View" class="btn btn-link btn-primary btn-lg mr-5">
                                   <i class="fas fa-eye"></i>
                                 </a> -->
-                                <a  href="{{ route('update-stock', $stock->id) }}" type="button" title="Edit Item" class=" btn btn-link btn-primary btn-lg">
+                                <a  href="{{ route('update-stock-out', $stock->id) }}" type="button" title="Edit Item" class=" btn btn-link btn-primary btn-lg">
                                   <i class="fa fa-edit"></i>
                                 </a>
                               </div>
